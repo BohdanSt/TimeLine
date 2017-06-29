@@ -6,7 +6,18 @@
         xmlns:local="clr-namespace:TimeLine"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
+    <Grid VerticalAlignment="Bottom" HorizontalAlignment="Right">
+        <local:Life Margin="-215,-39,215,39"/>
+        <Button x:Name="button" Content="Button" HorizontalAlignment="Left" Margin="64,169,0,0" VerticalAlignment="Top" Width="75" Height="36" RenderTransformOrigin="0.5,0.5">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleY="-1"/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.23"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+
     </Grid>
 </Window>
