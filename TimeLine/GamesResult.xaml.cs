@@ -16,12 +16,11 @@ using System.Windows.Shapes;
 namespace TimeLine
 {
     /// <summary>
-    /// Логика взаимодействия для LifeControl.xaml
+    /// Interaction logic for GamesResult.xaml
     /// </summary>
-    public partial class LifeControl : UserControl
+    public partial class GamesResult : UserControl
     {
-        bool status = true;
-        public LifeControl()
+        public GamesResult()
         {
             InitializeComponent();
         }

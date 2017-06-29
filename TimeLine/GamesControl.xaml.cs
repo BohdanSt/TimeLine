@@ -1,5 +1,4 @@
-﻿using MahApps.Metro.Controls;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,11 +16,11 @@ using System.Windows.Shapes;
 namespace TimeLine
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for GamesControl.xaml
     /// </summary>
-    public partial class MainWindow : MetroWindow
+    public partial class GamesControl : UserControl
     {
-        public MainWindow()
+        public GamesControl()
         {
             InitializeComponent();
         }

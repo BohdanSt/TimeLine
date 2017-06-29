@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace TimeLine
+namespace TimeLine.GamesControls
 {
     /// <summary>
     /// Логика взаимодействия для Life.xaml
