@@ -5,8 +5,17 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TimeLine"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="500" d:DesignWidth="750">
     <Grid>
-            
+        <Button x:Name="buttonAgainGame" Content="Розпочати знову" Margin="100,340,450,100" Height="60" FontSize="16">
+            <Button.Background>
+                <SolidColorBrush Color="WhiteSmoke" Opacity="0.75"/>
+            </Button.Background>
+        </Button>
+        <Button x:Name="buttonGameOver" Content="Закінчити гру" Margin="450,340,100,100" Height="60" FontSize="16">
+            <Button.Background>
+                <SolidColorBrush Color="WhiteSmoke" Opacity="0.75"/>
+            </Button.Background>
+        </Button>
     </Grid>
 </UserControl>
