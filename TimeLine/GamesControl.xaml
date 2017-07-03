@@ -7,6 +7,10 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="pack://application:,,,/TimeLine;component/Images/Supper.jpg" 
+                        Stretch="UniformToFill" RenderOptions.BitmapScalingMode="HighQuality" Opacity="0.75"/>
+        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition />

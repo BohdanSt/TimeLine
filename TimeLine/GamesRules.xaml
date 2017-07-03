@@ -9,19 +9,37 @@
              d:DesignHeight="500" d:DesignWidth="750">
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="pack://application:,,,/TimeLine;component/Images/BackgroundRules.png" 
-                        Stretch="UniformToFill" RenderOptions.BitmapScalingMode="HighQuality"/>
+            <ImageBrush ImageSource="pack://application:,,,/TimeLine;component/Images/BackgroundRules.jpg" 
+                        Stretch="UniformToFill" RenderOptions.BitmapScalingMode="HighQuality" Opacity="0.75"/>
         </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <RichTextBox x:Name="richTextBoxRules" Grid.Row="0" Margin="10" Background="Transparent" BorderThickness="0"
-                     HorizontalContentAlignment="Stretch" VerticalContentAlignment="Center" FontSize="16"/>
-        <Button x:Name="buttonStartGame" Grid.Row="1" Content="Розпочати гру" Margin="50" Height="60" Width="450" FontSize="16">
-            <Button.Background>
-                <SolidColorBrush Color="WhiteSmoke" Opacity="0.75"/>
-            </Button.Background>
-        </Button>
+        <Border Margin="25" Grid.Row="0">
+            <Border.Background>
+                <SolidColorBrush Color="White" Opacity="0.4"/>
+            </Border.Background>
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="Правила гри:" Margin="25" VerticalAlignment="Center" HorizontalAlignment="Center"
+                           Foreground="Black" FontWeight="SemiBold" FontSize="36" FontFamily="Calibri"/>
+                <RichTextBox x:Name="richTextBoxRules" Margin="25" Background="Transparent" BorderThickness="0" Foreground="Black" FontWeight="SemiBold"
+                             HorizontalContentAlignment="Stretch" VerticalContentAlignment="Center" FontSize="36" FontFamily="Calibri" 
+                             VerticalScrollBarVisibility="Auto" IsReadOnly="True" SelectionOpacity="0"/>
+            </StackPanel>
+        </Border>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center">
+            <Button x:Name="buttonStartGame" Grid.Row="1" Content="Розпочати гру" Margin="50" Height="60" Width="450" 
+                FontSize="16" Click="buttonStartGame_Click">
+                <Button.Background>
+                    <SolidColorBrush Color="White" Opacity="0.65"/>
+                </Button.Background>
+            </Button>
+
+            <Button x:Name="buttonStartGame2" Grid.Row="1" Content="Розпочати гру" Margin="50" Height="60" Width="450" 
+                FontSize="16" Click="buttonStartGame_Click" Background="Transparent" BorderBrush="White" BorderThickness="5" Foreground="White"/>
+        </StackPanel>
+        
     </Grid>
 </UserControl>

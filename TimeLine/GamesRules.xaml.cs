@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.IO;
 
 namespace TimeLine
 {
@@ -20,9 +21,26 @@ namespace TimeLine
     /// </summary>
     public partial class GamesRules : UserControl
     {
+        public delegate void StartGameDelegate();
+
+        public event StartGameDelegate StartGame;
+
         public GamesRules()
         {
             InitializeComponent();
+
+            LoadRules();
+        }
+
+        private void LoadRules()
+        {
+            var fileStream = new FileStream("Rules.txt", FileMode.Open, FileAccess.Read, FileShare.Read);
+            richTextBoxRules.Selection.Load(fileStream, DataFormats.Text);
+        } 
+
+        private void buttonStartGame_Click(object sender, RoutedEventArgs e)
+        {
+            StartGame?.Invoke();
         }
     }
 }

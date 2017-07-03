@@ -7,7 +7,8 @@
         xmlns:local="clr-namespace:TimeLine"
         mc:Ignorable="d"
         WindowState="Maximized"
-        WindowTitleBrush="#FF153E24"
+        Background="Black"
+        TitleCharacterCasing="Normal"
         Title="TimeLine" Height="500" Width="750">
     <Grid>
         <local:GamesRules x:Name="gamesRules" Visibility="Visible"/>

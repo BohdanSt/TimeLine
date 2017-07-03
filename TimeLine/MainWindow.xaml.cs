@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace TimeLine
 {
@@ -24,6 +26,33 @@ namespace TimeLine
         public MainWindow()
         {
             InitializeComponent();
+
+            gamesRules.StartGame += StartGame;
+        }
+
+        private void StartGame()
+        {
+            ShowGameControl();
+        }
+
+        private void ShowGameControl()
+        {
+            gamesRules.Opacity = 1;
+            gamesControl.Opacity = 0;
+            gamesControl.Visibility = Visibility.Visible;
+
+            for (int i = 0; i < 100; i++)
+            {
+                gamesRules.Opacity -= 0.01;
+                gamesControl.Opacity += 0.01;
+
+                Dispatcher.Invoke(DispatcherPriority.Render, (Action)(() => { }));
+                Thread.Sleep(20);
+                Dispatcher.Invoke(DispatcherPriority.Render, (Action)(() => { }));
+            }
+
+            gamesRules.Visibility = Visibility.Collapsed;
+            gamesRules.Opacity = 1;
         }
     }
 }
