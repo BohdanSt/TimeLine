@@ -24,6 +24,7 @@ namespace TimeLine
         public MainWindow()
         {
             InitializeComponent();
+            Question.ReadQuestions();
         }
     }
 }
