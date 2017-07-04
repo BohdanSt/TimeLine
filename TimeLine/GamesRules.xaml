@@ -38,7 +38,7 @@
             </Button>
 
             <Button x:Name="buttonStartGame2" Grid.Row="1" Content="Розпочати гру" Margin="50" Height="60" Width="450" 
-                FontSize="16" Click="buttonStartGame_Click" Background="Transparent" BorderBrush="White" BorderThickness="5" Foreground="White"/>
+                FontSize="16" Click="buttonStartGame_Click" Background="Transparent" BorderBrush="White" BorderThickness="5" Foreground="Black"/>
         </StackPanel>
         
     </Grid>

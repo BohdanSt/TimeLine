@@ -157,8 +157,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\activehart.png" />
     <Resource Include="Images\disactive hart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\activehart.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

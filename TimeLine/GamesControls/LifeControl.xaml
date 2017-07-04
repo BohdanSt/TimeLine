@@ -4,11 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TimeLine"
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-        <!--<Image x:Name="ActiveLife" Source=" "/>
-        <Image x:Name="DisactiveLife" Source=" "/>-->
-        
+             mc:Ignorable="d" Height="23.162" Width="22.059">
+    <Grid RenderTransformOrigin="4.412,2.446" Margin="0,0,-167,-61">
+        <Image x:Name="ActiveLife" Source="C:\Users\Petr Stakhov\Source\Repos\TimeLine\TimeLine\Images\activehart.png" Margin="0,0,160,45"/>
+            <Image x:Name="DisactiveLife" Source="C:\Users\Petr Stakhov\Source\Repos\TimeLine\TimeLine\Images\disactive hart.png" Margin="43,-19,117,22" RenderTransformOrigin="1.711,0.463"/>
+
     </Grid>
 </UserControl>
