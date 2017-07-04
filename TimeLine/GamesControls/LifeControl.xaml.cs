@@ -25,5 +25,14 @@ namespace TimeLine.GamesControls
         {
             InitializeComponent();
         }
+        public bool GetStatus()
+        {
+            return status;
+        }
+        public void Fail()
+        {
+            status = false;
+        }
+
     }
 }

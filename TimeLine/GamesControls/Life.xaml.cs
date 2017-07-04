@@ -34,5 +34,17 @@ namespace TimeLine.GamesControls
                 lifelist.Add(control);
             }
         }
+
+        private void fail()
+        {
+            for (int i = 0; i < AmountOfLife; i++)
+            {
+                if(lifelist[i].GetStatus() == true)
+                {
+                    lifelist[i].Fail();
+                    break;
+                }
+            }
+        }
     }
 }

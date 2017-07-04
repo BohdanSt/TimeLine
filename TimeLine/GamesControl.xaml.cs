@@ -20,9 +20,20 @@ namespace TimeLine
     /// </summary>
     public partial class GamesControl : UserControl
     {
+        int Counter;
         public GamesControl()
         {
+            Counter = 0;
             InitializeComponent();
         }
+
+        public int GetCounter()
+        {
+            return Counter;
+        }
+        public void Addition()
+        {
+            Counter++;
+        } 
     }
 }

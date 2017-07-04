@@ -20,9 +20,20 @@ namespace TimeLine
     /// </summary>
     public partial class GamesResult : UserControl
     {
+        List<string> YourLevel = new List<string>
+        {
+            "Адам і Єва",
+            "Падший ангел",
+            "Ангел",
+            "Архангел",
+            "Серафім і Херувім",
+            "Біблеїст",
+            "-----"
+        };
         public GamesResult()
         {
             InitializeComponent();
+            
         }
     }
 }
