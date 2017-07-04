@@ -20,11 +20,15 @@ namespace TimeLine
     /// </summary>
     public partial class GamesControl : UserControl
     {
-        int Counter;
+        private int Counter;
+
         public GamesControl()
         {
             Counter = 0;
             InitializeComponent();
+
+            UpdateNumberOfQuestion();
+            UpdateQuestion("Question number 1");
         }
 
         public int GetCounter()
@@ -34,6 +38,16 @@ namespace TimeLine
         public void Addition()
         {
             Counter++;
-        } 
+        }
+
+        void UpdateNumberOfQuestion()
+        {
+            textBlockNumberOfQuestion.Text = "Подія " + Counter.ToString() + " з 30";
+        }
+
+        void UpdateQuestion(string question)
+        {
+            textBlockQuestion.Text = question;
+        }
     }
 }

@@ -20,28 +20,35 @@ namespace TimeLine.GamesControls
     /// </summary>
     public partial class Life : UserControl
     {
-        public int AmountOfLife { get; set; }
-        List<LifeControl> lifelist = new List<LifeControl>();
+        const int MAXLifeAmount = 5;
+
+        public int CurrentAmountOfLife { get; set; }
+
+        List<LifeControl> lifeList = new List<LifeControl>();
+
         public Life()
         {
             InitializeComponent();
-            for(int i = 0; i < AmountOfLife; i++)
+
+            CurrentAmountOfLife = MAXLifeAmount;
+
+            for(int i = 0; i < MAXLifeAmount; i++)
             {
                 LifeContainer.ColumnDefinitions.Add(new ColumnDefinition());
                 LifeControl control = new LifeControl();
                 Grid.SetColumn(control, i);
                 LifeContainer.Children.Add(control);
-                lifelist.Add(control);
+                lifeList.Add(control);
             }
         }
 
-        private void fail()
+        private void Fail()
         {
-            for (int i = 0; i < AmountOfLife; i++)
+            for (int i = 0; i < MAXLifeAmount; i++)
             {
-                if(lifelist[i].GetStatus() == true)
+                if(lifeList[i].IsActive)
                 {
-                    lifelist[i].Fail();
+                    lifeList[i].IsActive = false;
                     break;
                 }
             }
