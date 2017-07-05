@@ -29,7 +29,7 @@
             </StackPanel>
         </Border>
 
-        <Button x:Name="buttonStartGame" Grid.Row="1" Content="Розпочати гру" Margin="25 10 25 25" Height="60" Width="450" 
+        <Button x:Name="buttonStartGame" Grid.Row="1" Content="Розпочати гру" Margin="25 0 25 25" Height="60" Width="450" 
             Foreground="Black" FontWeight="SemiBold" FontSize="20" FontFamily="Calibri" Click="buttonStartGame_Click">
             <Button.Background>
                 <SolidColorBrush Color="White" Opacity="0.65"/>
