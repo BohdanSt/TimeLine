@@ -41,13 +41,13 @@ namespace TimeLine
             gamesControl.Opacity = 0;
             gamesControl.Visibility = Visibility.Visible;
 
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 50; i++)
             {
-                gamesRules.Opacity -= 0.01;
-                gamesControl.Opacity += 0.01;
+                gamesRules.Opacity -= 0.02;
+                gamesControl.Opacity += 0.02;
 
                 Dispatcher.Invoke(DispatcherPriority.Render, (Action)(() => { }));
-                Thread.Sleep(20);
+                Thread.Sleep(25);
                 Dispatcher.Invoke(DispatcherPriority.Render, (Action)(() => { }));
             }
 

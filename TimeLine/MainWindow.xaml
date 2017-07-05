@@ -9,7 +9,8 @@
         WindowState="Maximized"
         Background="Black"
         TitleCharacterCasing="Normal"
-        Title="TimeLine" Height="500" Width="750">
+        Title="TimeLine" Height="500" Width="750" 
+        NonActiveWindowTitleBrush="#FF555555"  WindowTitleBrush="#FF444040">
     <Grid>
         <local:GamesRules x:Name="gamesRules" Visibility="Visible"/>
         <local:GamesControl x:Name="gamesControl" Visibility="Collapsed"/>

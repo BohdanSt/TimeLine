@@ -26,6 +26,9 @@ namespace TimeLine
         {
             Counter = 0;
             InitializeComponent();
+
+            UpdateNumberOfQuestion();
+            UpdateQuestion("Question number 1");
         }
         public static void Random()
         {
@@ -39,6 +42,16 @@ namespace TimeLine
         public void Addition()
         {
             Counter++;
-        } 
+        }
+
+        void UpdateNumberOfQuestion()
+        {
+            textBlockNumberOfQuestion.Text = "Подія " + Counter.ToString() + " з 30";
+        }
+
+        void UpdateQuestion(string question)
+        {
+            textBlockQuestion.Text = question;
+        }
     }
 }

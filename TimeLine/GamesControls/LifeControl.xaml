@@ -4,10 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TimeLine"
-             mc:Ignorable="d" Height="23.162" Width="22.059">
-    <Grid RenderTransformOrigin="4.412,2.446" Margin="0,0,-167,-61">
-        <Image x:Name="ActiveLife" Source="pack://application:,,,/TimeLine;component/Images/activeheart.png" Margin="0,0,160,45"/>
-        <Image x:Name="DisactiveLife" Source="pack://application:,,,/TimeLine;component/Images/disactiveheart.png" Margin="43,-19,117,22" RenderTransformOrigin="1.711,0.463"/>
-
+             mc:Ignorable="d" Height="25" Margin="2" Opacity="0.75">
+    <Grid>
+        <Image x:Name="imageActiveLife" Source="pack://application:,,,/TimeLine;component/Images/activehart.png" RenderOptions.BitmapScalingMode="HighQuality"/>
+        <Image x:Name="imageDisactiveLife" Source="pack://application:,,,/TimeLine;component/Images/disactive hart.png" RenderOptions.BitmapScalingMode="HighQuality"/>
     </Grid>
 </UserControl>
