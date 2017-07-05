@@ -20,21 +20,45 @@ namespace TimeLine
     /// </summary>
     public partial class GamesControl : UserControl
     {
-        int Counter;
-        List<Question> mylist;
+        private int Counter;
+
+        private List<Question> questionList;
+
+        private List<int> usedQuestion = new List<int>();
+
+        private Random rand = new Random();
+
         public GamesControl()
         {
-            Counter = 0;
             InitializeComponent();
 
-            UpdateNumberOfQuestion();
-            UpdateQuestion("Question number 1");
+            questionList = Question.ReadQuestions();
         }
-        public static void Random()
+
+        public int GetRandom()
         {
-            Random rnd = new Random();
-            int index = rnd.Next(2, 30);
+            int index;
+            do
+            {
+                index = rand.Next(questionList.Count);
+            } while (usedQuestion.Contains(index));
+
+            usedQuestion.Add(index);
+
+            return index;
         }
+
+        public void StartGame()
+        {
+            Counter = 0;
+            usedQuestion.Clear();
+
+            UpdateNumberOfQuestion();
+            UpdateQuestion(questionList[GetRandom()].Name);
+
+            gamesControlLife.Initialize();
+        }
+
         public int GetCounter()
         {
             return Counter;

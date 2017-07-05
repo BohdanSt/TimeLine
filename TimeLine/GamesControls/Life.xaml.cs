@@ -20,17 +20,21 @@ namespace TimeLine.GamesControls
     /// </summary>
     public partial class Life : UserControl
     {
-        const int MAXLifeAmount = 5;
+        private const int MAXLifeAmount = 5;
 
-        public int CurrentAmountOfLife { get; set; }
+        public int CurrentAmountOfLife
+        {
+            get
+            {
+                return lifeList.Where(l => l.IsActive).Count();
+            }
+        }
 
         List<LifeControl> lifeList = new List<LifeControl>();
 
         public Life()
         {
             InitializeComponent();
-
-            CurrentAmountOfLife = MAXLifeAmount;
 
             for(int i = 0; i < MAXLifeAmount; i++)
             {
@@ -42,15 +46,24 @@ namespace TimeLine.GamesControls
             }
         }
 
-        private void Fail()
+        public bool Fail()
         {
             for (int i = 0; i < MAXLifeAmount; i++)
             {
                 if(lifeList[i].IsActive)
                 {
                     lifeList[i].IsActive = false;
-                    break;
+                    return true;
                 }
+            }
+            return false;
+        }
+
+        public void Initialize()
+        {
+            for (int i = MAXLifeAmount - 1; i >= 0; i--)
+            {
+                lifeList[i].IsActive = true;
             }
         }
     }

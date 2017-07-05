@@ -33,6 +33,8 @@ namespace TimeLine
         private void StartGame()
         {
             ShowGameControl();
+
+            gamesControl.StartGame();
         }
 
         private void ShowGameControl()

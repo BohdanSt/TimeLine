@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:TimeLine"
              mc:Ignorable="d" Height="25" Margin="2" Opacity="0.75">
     <Grid>
-        <Image x:Name="imageActiveLife" Source="pack://application:,,,/TimeLine;component/Images/activehart.png" RenderOptions.BitmapScalingMode="HighQuality"/>
-        <Image x:Name="imageDisactiveLife" Source="pack://application:,,,/TimeLine;component/Images/disactive hart.png" RenderOptions.BitmapScalingMode="HighQuality"/>
+        <Image x:Name="imageActiveLife" Source="pack://application:,,,/TimeLine;component/Images/activeheart.png" RenderOptions.BitmapScalingMode="HighQuality"/>
+        <Image x:Name="imageDisactiveLife" Source="pack://application:,,,/TimeLine;component/Images/disactiveheart.png" RenderOptions.BitmapScalingMode="HighQuality"/>
     </Grid>
 </UserControl>

@@ -47,8 +47,6 @@ namespace TimeLine.GamesControls
         public LifeControl()
         {
             InitializeComponent();
-
-            IsActive = true;
         }
 
         void ActivateControl()

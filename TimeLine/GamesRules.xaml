@@ -29,18 +29,11 @@
             </StackPanel>
         </Border>
 
-        <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center">
-            <Button x:Name="buttonStartGame" Grid.Row="1" Content="Розпочати гру" Margin="25" Height="60" Width="450" 
-                Foreground="Black" FontWeight="SemiBold" FontSize="20" FontFamily="Calibri" Click="buttonStartGame_Click">
-                <Button.Background>
-                    <SolidColorBrush Color="White" Opacity="0.65"/>
-                </Button.Background>
-            </Button>
-
-            <Button x:Name="buttonStartGame2" Grid.Row="1" Content="Розпочати гру" Margin="25" Height="60" Width="450" 
-                    Foreground="Black" FontWeight="SemiBold" FontSize="20" FontFamily="Calibri" 
-                    Click="buttonStartGame_Click" Background="Transparent" BorderBrush="White" BorderThickness="5"/>
-        </StackPanel>
-        
+        <Button x:Name="buttonStartGame" Grid.Row="1" Content="Розпочати гру" Margin="25 10 25 25" Height="60" Width="450" 
+            Foreground="Black" FontWeight="SemiBold" FontSize="20" FontFamily="Calibri" Click="buttonStartGame_Click">
+            <Button.Background>
+                <SolidColorBrush Color="White" Opacity="0.65"/>
+            </Button.Background>
+        </Button>
     </Grid>
 </UserControl>
