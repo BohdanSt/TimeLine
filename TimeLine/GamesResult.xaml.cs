@@ -24,8 +24,8 @@ namespace TimeLine
         List<string> YourLevel = new List<string>
         {
             "Варвар",
-            "Елін",
-            "Зілот",
+            "Грек",
+            "Прозеліт",
             "Юдей",
             "Книжник",
             "Равін"
@@ -36,6 +36,14 @@ namespace TimeLine
             
         }
 
+        private void buttonGameOver_Click(object sender, RoutedEventArgs e)
+        {
 
+        }
+
+        private void buttonGameAgaine_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

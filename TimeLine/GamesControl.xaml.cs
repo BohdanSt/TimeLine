@@ -21,12 +21,17 @@ namespace TimeLine
     public partial class GamesControl : UserControl
     {
         int Counter;
+        List<Question> mylist;
         public GamesControl()
         {
             Counter = 0;
             InitializeComponent();
         }
-
+        public static void Random()
+        {
+            Random rnd = new Random();
+            int index = rnd.Next(2, 30);
+        }
         public int GetCounter()
         {
             return Counter;

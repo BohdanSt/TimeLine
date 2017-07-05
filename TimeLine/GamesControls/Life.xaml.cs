@@ -35,7 +35,7 @@ namespace TimeLine.GamesControls
             }
         }
 
-        private void fail()
+        private void Fail()
         {
             for (int i = 0; i < AmountOfLife; i++)
             {
