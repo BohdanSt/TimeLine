@@ -34,8 +34,7 @@ namespace TimeLine
 
         private void LoadRules()
         {
-            var fileStream = new FileStream("Rules.txt", FileMode.Open, FileAccess.Read, FileShare.Read);
-            richTextBoxRules.Selection.Load(fileStream, DataFormats.Text);
+            textBoxRules.Text = File.ReadAllText("Rules.txt");
         } 
 
         private void buttonStartGame_Click(object sender, RoutedEventArgs e)

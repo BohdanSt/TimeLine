@@ -9,7 +9,6 @@ namespace TimeLine
 {
     class Question
     {
-
         public string Name { get; set; }
         public int Index { get; set; }
 
@@ -25,6 +24,5 @@ namespace TimeLine
             }
             return Qst;
         }
-
     }
 }

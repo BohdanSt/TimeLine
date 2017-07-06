@@ -20,15 +20,22 @@
             <Border.Background>
                 <SolidColorBrush Color="White" Opacity="0.4"/>
             </Border.Background>
-            <StackPanel Orientation="Vertical">
-                <TextBlock Text="Правила гри:" Margin="25" VerticalAlignment="Center" HorizontalAlignment="Center"
-                           Foreground="Black" FontWeight="SemiBold" FontSize="36" FontFamily="Calibri"/>
-                <RichTextBox x:Name="richTextBoxRules" Margin="25" Background="Transparent" BorderThickness="0" Foreground="Black" FontWeight="SemiBold"
-                             HorizontalContentAlignment="Stretch" VerticalContentAlignment="Center" FontSize="36" FontFamily="Calibri" 
-                             VerticalScrollBarVisibility="Auto" IsReadOnly="True" SelectionOpacity="0"/>
-            </StackPanel>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="3*"/>
+                </Grid.RowDefinitions>
+                <Viewbox Stretch="Uniform" Grid.Row="0">
+                    <TextBlock Text="Правила гри:" Margin="25" VerticalAlignment="Center" HorizontalAlignment="Center"
+                           Foreground="Black" FontWeight="SemiBold" FontSize="48" FontFamily="Calibri"/>
+                </Viewbox>
+                <Viewbox Stretch="Uniform" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center">
+                    <TextBlock x:Name="textBoxRules" Margin="25 0 25 25" HorizontalAlignment="Stretch" VerticalAlignment="Top" TextWrapping="Wrap"
+                           Foreground="Black" FontWeight="SemiBold" FontSize="36" FontFamily="Calibri" Width="800"/>
+                </Viewbox>
+            </Grid>
         </Border>
-
+        
         <Button x:Name="buttonStartGame" Grid.Row="1" Content="Розпочати гру" Margin="25 0 25 25" Height="60" Width="450" 
             Foreground="Black" FontWeight="SemiBold" FontSize="20" FontFamily="Calibri" Click="buttonStartGame_Click">
             <Button.Background>

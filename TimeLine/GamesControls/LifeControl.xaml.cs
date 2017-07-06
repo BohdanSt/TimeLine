@@ -49,40 +49,36 @@ namespace TimeLine.GamesControls
             InitializeComponent();
         }
 
-        void ActivateControl()
+        private async void ActivateControl()
         {
             imageDisactiveLife.Opacity = 1;
             imageActiveLife.Opacity = 0;
             imageActiveLife.Visibility = Visibility.Visible;
 
-            for (int i = 0; i < 50; i++)
+            for (int i = 0; i < 20; i++)
             {
-                imageDisactiveLife.Opacity -= 0.02;
-                imageActiveLife.Opacity += 0.02;
+                imageDisactiveLife.Opacity -= 0.05;
+                imageActiveLife.Opacity += 0.05;
 
-                Dispatcher.Invoke(DispatcherPriority.Render, (Action)(() => { }));
-                Thread.Sleep(25);
-                Dispatcher.Invoke(DispatcherPriority.Render, (Action)(() => { }));
+                await Task.Delay(20);
             }
 
             imageDisactiveLife.Visibility = Visibility.Collapsed;
             imageDisactiveLife.Opacity = 1;
         }
 
-        void DisactivateControl()
+        private async void DisactivateControl()
         {
             imageActiveLife.Opacity = 1;
             imageDisactiveLife.Opacity = 0;
             imageDisactiveLife.Visibility = Visibility.Visible;
 
-            for (int i = 0; i < 50; i++)
+            for (int i = 0; i < 20; i++)
             {
-                imageActiveLife.Opacity -= 0.02;
-                imageDisactiveLife.Opacity += 0.02;
+                imageActiveLife.Opacity -= 0.05;
+                imageDisactiveLife.Opacity += 0.5;
 
-                Dispatcher.Invoke(DispatcherPriority.Render, (Action)(() => { }));
-                Thread.Sleep(25);
-                Dispatcher.Invoke(DispatcherPriority.Render, (Action)(() => { }));
+                await Task.Delay(25);
             }
 
             imageActiveLife.Visibility = Visibility.Collapsed;

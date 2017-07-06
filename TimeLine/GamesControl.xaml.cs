@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TimeLine.GamesControls;
 
 namespace TimeLine
 {
@@ -33,6 +34,8 @@ namespace TimeLine
             InitializeComponent();
 
             questionList = Question.ReadQuestions();
+
+            StartGame();
         }
 
         public int GetRandom()
