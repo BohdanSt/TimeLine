@@ -10,7 +10,8 @@
              HorizontalAlignment="Left">
     <Grid x:Name="timeIntervalContainer"
           MouseEnter="timeIntervalContainer_MouseEnter" 
-          MouseLeave="timeIntervalContainer_MouseLeave">
+          MouseLeave="timeIntervalContainer_MouseLeave"
+          MouseDown="timeIntervalContainer_MouseDown">
 
     </Grid>
 </UserControl>

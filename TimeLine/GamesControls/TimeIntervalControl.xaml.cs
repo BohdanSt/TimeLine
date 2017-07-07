@@ -28,6 +28,10 @@ namespace TimeLine.GamesControls
 
         private SolidColorBrush normalBrush = new SolidColorBrush(Color.FromRgb(255, 206, 57));
 
+        private SolidColorBrush rightAnswerBrush = new SolidColorBrush(Color.FromRgb(57, 255, 57));
+
+        private SolidColorBrush wrongAnswerBrush = new SolidColorBrush(Color.FromRgb(255, 57, 57));
+
         public delegate void ControlMouseEnterDelegate(int position);
 
         public event ControlMouseEnterDelegate ControlMouseEnter;
@@ -35,6 +39,10 @@ namespace TimeLine.GamesControls
         public delegate void ControlMouseLeaveDelegate(int position);
 
         public event ControlMouseLeaveDelegate ControlMouseLeave;
+
+        public delegate void ControlMouseDownDelegate(int position);
+
+        public event ControlMouseDownDelegate ControlMouseDown;
 
         public TimeIntervalControl(int position)
         {
@@ -73,6 +81,39 @@ namespace TimeLine.GamesControls
             this.Height = 75;
             this.Margin = new Thickness(0, -15, 0, -15);
             ControlMouseLeave?.Invoke(controlPosition);
+        }
+
+        public void ShowAsWrongAnswer()
+        {
+            timeIntervalContainer.Background = wrongAnswerBrush;
+            timeIntervalContainer.Background.Opacity = 1;
+        }
+
+        public async void ExpandControl()
+        {
+            timeIntervalContainer.Background = rightAnswerBrush;
+            timeIntervalContainer.Background.Opacity = 1;
+
+            for (int i = NormalLineNumber; i < MAXLineNumber; i++)
+            {
+                timeIntervalContainer.RowDefinitions.Add(new RowDefinition());
+                Line line = new Line();
+                line.Height = 1;
+                line.StrokeThickness = 1;
+                line.Width = this.Width / 6;
+                line.X2 = this.Width / 6;
+                line.Stroke = Brushes.White;
+                Grid.SetRow(line, i);
+                timeIntervalContainer.Children.Add(line);
+
+                this.Height += 5;
+                await Task.Delay(10);
+            }
+        }
+
+        private void timeIntervalContainer_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            ControlMouseDown?.Invoke(controlPosition);
         }
     }
 }

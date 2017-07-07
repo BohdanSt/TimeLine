@@ -42,9 +42,19 @@ namespace TimeLine.GamesControls
 
             timeInterval.ControlMouseEnter += TimeInterval_ControlMouseEnter;
             timeInterval.ControlMouseLeave += TimeInterval_ControlMouseLeave;
+            timeInterval.ControlMouseDown += TimeInterval_ControlMouseDown;
 
             Grid.SetRow(timeInterval, rowNumber);
             timeLineControlContainer.Children.Add(timeInterval);
+        }
+
+        private void TimeInterval_ControlMouseEnter(int position)
+        {
+            QuestionControl control = timeLineControlContainer.Children[position - 1] as QuestionControl;
+            control.textBlockQuestion.FontSize = 30;
+
+            control = timeLineControlContainer.Children[position + 1] as QuestionControl;
+            control.textBlockQuestion.FontSize = 30;
         }
 
         private void TimeInterval_ControlMouseLeave(int position)
@@ -56,13 +66,9 @@ namespace TimeLine.GamesControls
             control.textBlockQuestion.FontSize = 24;
         }
 
-        private void TimeInterval_ControlMouseEnter(int position)
+        private void TimeInterval_ControlMouseDown(int position)
         {
-            QuestionControl control = timeLineControlContainer.Children[position - 1] as QuestionControl;
-            control.textBlockQuestion.FontSize = 30;
-
-            control = timeLineControlContainer.Children[position + 1] as QuestionControl;
-            control.textBlockQuestion.FontSize = 30;
+            //throw new NotImplementedException();
         }
 
         private void AddNewQuestionLine(int rowNumber, string question)

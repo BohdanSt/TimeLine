@@ -34,8 +34,6 @@ namespace TimeLine
             InitializeComponent();
 
             questionList = Question.ReadQuestions();
-
-            StartGame();
         }
 
         public int GetRandom()
