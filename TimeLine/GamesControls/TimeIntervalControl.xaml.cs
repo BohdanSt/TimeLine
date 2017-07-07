@@ -24,18 +24,26 @@ namespace TimeLine.GamesControls
 
         private const int NormalLineNumber = 15;
 
+        private int controlPosition;
+
         private SolidColorBrush normalBrush = new SolidColorBrush(Color.FromRgb(255, 206, 57));
 
-        private SolidColorBrush currentBrush = new SolidColorBrush();
+        public delegate void ControlMouseEnterDelegate(int position);
 
-        public TimeIntervalControl()
+        public event ControlMouseEnterDelegate ControlMouseEnter;
+
+        public delegate void ControlMouseLeaveDelegate(int position);
+
+        public event ControlMouseLeaveDelegate ControlMouseLeave;
+
+        public TimeIntervalControl(int position)
         {
             InitializeComponent();
 
-            currentBrush.Color = normalBrush.Color;
-            currentBrush.Opacity = 0.75;
+            controlPosition = position;
 
-            timeIntervalContainer.Background = currentBrush;
+            timeIntervalContainer.Background = normalBrush;
+            timeIntervalContainer.Opacity = 0.75;
 
             for (int i = 0; i < NormalLineNumber; i++)
             {
@@ -51,6 +59,20 @@ namespace TimeLine.GamesControls
             }
         }
 
+        private void timeIntervalContainer_MouseEnter(object sender, MouseEventArgs e)
+        {
+            timeIntervalContainer.Background.Opacity = 1;
+            this.Height = 100;
+            this.Margin = new Thickness(0, -20, 0, -20);
+            ControlMouseEnter?.Invoke(controlPosition);
+        }
 
+        private void timeIntervalContainer_MouseLeave(object sender, MouseEventArgs e)
+        {
+            timeIntervalContainer.Background.Opacity = 0.75;
+            this.Height = 75;
+            this.Margin = new Thickness(0, -15, 0, -15);
+            ControlMouseLeave?.Invoke(controlPosition);
+        }
     }
 }

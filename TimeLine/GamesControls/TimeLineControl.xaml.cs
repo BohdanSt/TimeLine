@@ -37,42 +37,41 @@ namespace TimeLine.GamesControls
 
         private void AddNewTimeInterval(int rowNumber)
         {
-            TimeIntervalControl timeInterval;
             timeLineControlContainer.RowDefinitions.Add(new RowDefinition());
-            timeInterval = new TimeIntervalControl();
+            TimeIntervalControl timeInterval = new TimeIntervalControl(rowNumber);
+
+            timeInterval.ControlMouseEnter += TimeInterval_ControlMouseEnter;
+            timeInterval.ControlMouseLeave += TimeInterval_ControlMouseLeave;
+
             Grid.SetRow(timeInterval, rowNumber);
-            timeInterval.Margin = new Thickness(0, -15, 0, -15);
-            timeInterval.HorizontalAlignment = HorizontalAlignment.Left;
             timeLineControlContainer.Children.Add(timeInterval);
+        }
+
+        private void TimeInterval_ControlMouseLeave(int position)
+        {
+            QuestionControl control = timeLineControlContainer.Children[position - 1] as QuestionControl;
+            control.textBlockQuestion.FontSize = 24;
+
+            control = timeLineControlContainer.Children[position + 1] as QuestionControl;
+            control.textBlockQuestion.FontSize = 24;
+        }
+
+        private void TimeInterval_ControlMouseEnter(int position)
+        {
+            QuestionControl control = timeLineControlContainer.Children[position - 1] as QuestionControl;
+            control.textBlockQuestion.FontSize = 30;
+
+            control = timeLineControlContainer.Children[position + 1] as QuestionControl;
+            control.textBlockQuestion.FontSize = 30;
         }
 
         private void AddNewQuestionLine(int rowNumber, string question)
         {
             timeLineControlContainer.RowDefinitions.Add(new RowDefinition());
+            QuestionControl questionControl = new QuestionControl(question);
 
-            StackPanel stackPanel = new StackPanel();
-            stackPanel.Orientation = Orientation.Horizontal;
-
-            Line line = new Line();
-            line.Height = 2;
-            line.StrokeThickness = 2;
-            line.Width = this.Width / 4;
-            line.X2 = this.Width / 4;
-            line.Stroke = Brushes.White;
-
-            TextBlock textBlock = new TextBlock();
-            textBlock.FontSize = 24;
-            textBlock.Margin = new Thickness(15, 0, 0, 0);
-            textBlock.VerticalAlignment = VerticalAlignment.Top;
-            textBlock.FontWeight = FontWeights.DemiBold;
-            textBlock.Foreground = Brushes.White;
-            textBlock.Text = question;
-
-            stackPanel.Children.Add(line);
-            stackPanel.Children.Add(textBlock);
-
-            Grid.SetRow(stackPanel, rowNumber);
-            timeLineControlContainer.Children.Add(stackPanel);
+            Grid.SetRow(questionControl, rowNumber);
+            timeLineControlContainer.Children.Add(questionControl);
         }
     }
 }

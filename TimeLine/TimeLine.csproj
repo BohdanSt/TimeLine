@@ -66,8 +66,8 @@
     <Compile Include="GamesControl.xaml.cs">
       <DependentUpon>GamesControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="GamesControls\TimeIntervalControlH.xaml.cs">
-      <DependentUpon>TimeIntervalControlH.xaml</DependentUpon>
+    <Compile Include="GamesControls\QuestionControl.xaml.cs">
+      <DependentUpon>QuestionControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="GamesControls\TimeIntervalControl.xaml.cs">
       <DependentUpon>TimeIntervalControl.xaml</DependentUpon>
@@ -92,9 +92,9 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="GamesControls\TimeIntervalControlH.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="GamesControls\QuestionControl.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="GamesControls\TimeIntervalControl.xaml">
       <SubType>Designer</SubType>

@@ -5,8 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TimeLine.GamesControls"
              mc:Ignorable="d" 
-             Width="72" Height="75">
-    <Grid x:Name="timeIntervalContainer">
+             Width="72" Height="75"
+             Margin="0 -15 0 -15"
+             HorizontalAlignment="Left">
+    <Grid x:Name="timeIntervalContainer"
+          MouseEnter="timeIntervalContainer_MouseEnter" 
+          MouseLeave="timeIntervalContainer_MouseLeave">
 
     </Grid>
 </UserControl>
