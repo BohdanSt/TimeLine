@@ -9,6 +9,6 @@
     <StackPanel Orientation="Horizontal">
         <Line x:Name="line" Height="2" StrokeThickness="2" Stroke="White"/>
         <TextBlock x:Name="textBlockQuestion" FontSize="24" FontWeight="DemiBold" Foreground="White"
-                   VerticalAlignment="Top" Margin="15 0 0 0"/>
+                   VerticalAlignment="Top" Margin="15 0 0 0" TextWrapping="Wrap"/>
     </StackPanel>
 </UserControl>

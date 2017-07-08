@@ -26,23 +26,27 @@ namespace TimeLine.GamesControls
 
         private const int NormalLineNumber = 15;
 
-        private int controlPosition;
-
         private SolidColorBrush normalBrush = new SolidColorBrush(Color.FromRgb(255, 206, 57));
 
         private SolidColorBrush rightAnswerBrush = new SolidColorBrush(Color.FromRgb(57, 255, 57));
 
         private SolidColorBrush wrongAnswerBrush = new SolidColorBrush(Color.FromRgb(255, 57, 57));
 
-        public delegate void ControlMouseEnterDelegate(int position);
+        public int Index;
+
+        public int IndexQuestionBefore;
+
+        public int IndexQuestionAfter;
+
+        public delegate void ControlMouseEnterDelegate(int indexBefore, int indexAfter);
 
         public event ControlMouseEnterDelegate ControlMouseEnter;
 
-        public delegate void ControlMouseLeaveDelegate(int position);
+        public delegate void ControlMouseLeaveDelegate(int indexBefore, int indexAfter);
 
         public event ControlMouseLeaveDelegate ControlMouseLeave;
 
-        public delegate void ControlMouseDownDelegate(int position);
+        public delegate void ControlMouseDownDelegate(int controlIndex);
 
         public event ControlMouseDownDelegate ControlMouseDown;
 
@@ -50,9 +54,9 @@ namespace TimeLine.GamesControls
         {
             InitializeComponent();
 
-            controlPosition = position;
-
             ShowAsNormal();
+
+            Index = position;
         }
 
         private void timeIntervalContainer_MouseEnter(object sender, MouseEventArgs e)
@@ -60,7 +64,7 @@ namespace TimeLine.GamesControls
             timeIntervalContainer.Background.Opacity = 1;
             this.Height = 100;
             this.Margin = new Thickness(0, -20, 0, -20);
-            ControlMouseEnter?.Invoke(controlPosition);
+            ControlMouseEnter?.Invoke(IndexQuestionBefore, IndexQuestionAfter);
         }
 
         private void timeIntervalContainer_MouseLeave(object sender, MouseEventArgs e)
@@ -68,13 +72,21 @@ namespace TimeLine.GamesControls
             timeIntervalContainer.Background.Opacity = 0.75;
             this.Height = 75;
             this.Margin = new Thickness(0, -15, 0, -15);
-            ControlMouseLeave?.Invoke(controlPosition);
+            ControlMouseLeave?.Invoke(IndexQuestionBefore, IndexQuestionAfter);
         }
 
         public void ShowAsWrongAnswer()
         {
             timeIntervalContainer.Background = wrongAnswerBrush;
             timeIntervalContainer.Background.Opacity = 1;
+
+            //timeIntervalContainer.Background.Dispatcher.Invoke(DispatcherPriority.Render, (Action)(() => { }));
+            //Thread.Sleep(1000);
+            //timeIntervalContainer.Background.Dispatcher.Invoke(DispatcherPriority.Render, (Action)(() => { }));
+
+            //Dispatcher.Invoke(DispatcherPriority.Render, (Action)(() => { }));
+            //Thread.Sleep(1000);
+            //Dispatcher.Invoke(DispatcherPriority.Render, (Action)(() => { }));
         }
 
         public void ExpandControl()
@@ -104,7 +116,7 @@ namespace TimeLine.GamesControls
 
         private void timeIntervalContainer_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            ControlMouseDown?.Invoke(controlPosition);
+            ControlMouseDown?.Invoke(Index);
         }
 
         public void ShowAsNormal()
@@ -114,7 +126,7 @@ namespace TimeLine.GamesControls
             timeIntervalContainer.Children.Clear();
             timeIntervalContainer.RowDefinitions.Clear();
             timeIntervalContainer.Background = normalBrush;
-            timeIntervalContainer.Opacity = 0.75;
+            timeIntervalContainer.Background.Opacity = 0.75;
 
             for (int i = 0; i < NormalLineNumber; i++)
             {

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace TimeLine.GamesControls
 {
@@ -20,6 +22,9 @@ namespace TimeLine.GamesControls
     /// </summary>
     public partial class TimeLineControl : UserControl
     {
+        private List<QuestionControl> questionControlList = new List<QuestionControl>();
+        private List<TimeIntervalControl> timeIntervalControlList = new List<TimeIntervalControl>();
+
         public Question CurrentQuestion { get; set; }
 
         public delegate void CheckingAnswerResultDelegate(bool isAnswerValid);
@@ -40,21 +45,34 @@ namespace TimeLine.GamesControls
                 timeLineControlContainer.RowDefinitions.Add(new RowDefinition());
             }
 
+            AddNewQuestionLine(0, 0, new Question() { Name = "Створення світу", Index = int.MinValue });
 
-            AddNewQuestionLine(0, new Question() { Name = "Створення світу", Index = int.MinValue });
+            AddNewTimeInterval(1, 0);
+            timeIntervalControlList[0].IndexQuestionBefore = 0;
+            timeIntervalControlList[0].IndexQuestionAfter = 1;
 
-            AddNewTimeInterval(1);
+            AddNewQuestionLine(2, 1, new Question() { Name = "Народження Христа", Index = 0 });
 
-            AddNewQuestionLine(2, new Question() { Name = "Народження Христа", Index = 0 });
+            AddNewTimeInterval(3, 1);
+            timeIntervalControlList[1].IndexQuestionBefore = 1;
+            timeIntervalControlList[1].IndexQuestionAfter = 2;
 
-            AddNewTimeInterval(3);
-
-            AddNewQuestionLine(4, new Question() { Name = "Вознесіння", Index = int.MaxValue });
+            AddNewQuestionLine(4, 2, new Question() { Name = "Вознесіння", Index = int.MaxValue });
         }
 
-        private void AddNewTimeInterval(int rowNumber)
+        private void AddNewQuestionLine(int rowNumber, int position, Question question)
         {
-            TimeIntervalControl timeInterval = new TimeIntervalControl(rowNumber);
+            QuestionControl questionControl = new QuestionControl(question);
+
+            Grid.SetRow(questionControl, rowNumber);
+            timeLineControlContainer.Children.Add(questionControl);
+
+            questionControlList.Insert(position, questionControl);
+        }
+
+        private TimeIntervalControl AddNewTimeInterval(int rowNumber, int position)
+        {
+            TimeIntervalControl timeInterval = new TimeIntervalControl(position);
 
             timeInterval.ControlMouseEnter += TimeInterval_ControlMouseEnter;
             timeInterval.ControlMouseLeave += TimeInterval_ControlMouseLeave;
@@ -62,41 +80,31 @@ namespace TimeLine.GamesControls
 
             Grid.SetRow(timeInterval, rowNumber);
             timeLineControlContainer.Children.Add(timeInterval);
+
+            timeIntervalControlList.Insert(position, timeInterval);
+
+            return timeInterval;
         }
 
-        private void AddNewQuestionLine(int rowNumber, Question question)
+        private void TimeInterval_ControlMouseEnter(int indexBefore, int indexAfter)
         {
-            QuestionControl questionControl = new QuestionControl(question);
-
-            Grid.SetRow(questionControl, rowNumber);
-            timeLineControlContainer.Children.Add(questionControl);
+            questionControlList[indexBefore].textBlockQuestion.FontSize = 30;
+            questionControlList[indexAfter].textBlockQuestion.FontSize = 30;
         }
 
-        private void TimeInterval_ControlMouseEnter(int position)
+        private void TimeInterval_ControlMouseLeave(int indexBefore, int indexAfter)
         {
-            QuestionControl control = timeLineControlContainer.Children[position - 1] as QuestionControl;
-            control.textBlockQuestion.FontSize = 30;
-
-            control = timeLineControlContainer.Children[position + 1] as QuestionControl;
-            control.textBlockQuestion.FontSize = 30;
+            questionControlList[indexBefore].textBlockQuestion.FontSize = 24;
+            questionControlList[indexAfter].textBlockQuestion.FontSize = 24;
         }
 
-        private void TimeInterval_ControlMouseLeave(int position)
+        private void TimeInterval_ControlMouseDown(int controlIndex)
         {
-            QuestionControl control = timeLineControlContainer.Children[position - 1] as QuestionControl;
-            control.textBlockQuestion.FontSize = 24;
-
-            control = timeLineControlContainer.Children[position + 1] as QuestionControl;
-            control.textBlockQuestion.FontSize = 24;
-        }
-
-        private void TimeInterval_ControlMouseDown(int position)
-        {
-            TimeIntervalControl clickedTimeIntervalControl = timeLineControlContainer.Children[position] as TimeIntervalControl;
+            TimeIntervalControl clickedTimeIntervalControl = timeIntervalControlList[controlIndex];
             TimeIntervalControl validTimeIntervalControl = null;
 
-            QuestionControl questionBefore = timeLineControlContainer.Children[position - 1] as QuestionControl;
-            QuestionControl questionAfter = timeLineControlContainer.Children[position + 1] as QuestionControl;
+            QuestionControl questionBefore = questionControlList[clickedTimeIntervalControl.IndexQuestionBefore];
+            QuestionControl questionAfter = questionControlList[clickedTimeIntervalControl.IndexQuestionAfter];
 
             bool isAnswerValid;
 
@@ -104,6 +112,12 @@ namespace TimeLine.GamesControls
                 && CurrentQuestion.Index < questionAfter.Question.Index)
             {
                 clickedTimeIntervalControl.ExpandControl();
+
+                Dispatcher.Invoke(DispatcherPriority.Render, (Action)(() => { }));
+                Thread.Sleep(500);
+                Dispatcher.Invoke(DispatcherPriority.Render, (Action)(() => { }));
+
+                InsertQuestion(controlIndex);
 
                 clickedTimeIntervalControl.ShowAsNormal();
 
@@ -113,19 +127,31 @@ namespace TimeLine.GamesControls
             {
                 clickedTimeIntervalControl.ShowAsWrongAnswer();
 
-                for (int i = 0; i < timeLineControlContainer.Children.Count; i++)
+                //Dispatcher.Invoke(DispatcherPriority.Render, (Action)(() => { }));
+                //Thread.Sleep(1000);
+                //Dispatcher.Invoke(DispatcherPriority.Render, (Action)(() => { }));
+
+                for (int i = 0; i < timeIntervalControlList.Count; i++)
                 {
-                    if (timeLineControlContainer.Children[i] is QuestionControl)
+                    questionBefore = questionControlList[timeIntervalControlList[i].IndexQuestionBefore];
+                    questionAfter = questionControlList[timeIntervalControlList[i].IndexQuestionAfter];
+
+                    if (CurrentQuestion.Index > questionBefore.Question.Index
+                        && CurrentQuestion.Index < questionAfter.Question.Index)
                     {
-                        QuestionControl questionControl = timeLineControlContainer.Children[i] as QuestionControl;
-                        if (questionControl.Question.Index > CurrentQuestion.Index)
-                        {
-                            validTimeIntervalControl = timeLineControlContainer.Children[i - 1] as TimeIntervalControl;
-                        }
+                        validTimeIntervalControl = timeIntervalControlList[i];
+                        break;
                     }
                 }
 
+                questionBefore.BringIntoView();
                 validTimeIntervalControl.ExpandControl();
+
+                Dispatcher.Invoke(DispatcherPriority.Render, (Action)(() => { }));
+                Thread.Sleep(500);
+                Dispatcher.Invoke(DispatcherPriority.Render, (Action)(() => { }));
+
+                InsertQuestion(validTimeIntervalControl.Index);
 
                 clickedTimeIntervalControl.ShowAsNormal();
                 validTimeIntervalControl.ShowAsNormal();
@@ -135,5 +161,31 @@ namespace TimeLine.GamesControls
 
             CheckingAnswerResult?.Invoke(isAnswerValid);
         }
+
+        private void InsertQuestion(int position)
+        {
+            TimeIntervalControl validControl = timeIntervalControlList[position];
+            int rowIndex = Grid.GetRow(validControl);
+            int index = timeIntervalControlList.IndexOf(validControl);
+
+            for (int i = index + 1; i < timeIntervalControlList.Count; i++)
+            {
+                timeIntervalControlList[i].Index++;
+                timeIntervalControlList[i].IndexQuestionBefore++;
+                timeIntervalControlList[i].IndexQuestionAfter++;
+                Grid.SetRow(timeIntervalControlList[i], Grid.GetRow(timeIntervalControlList[i]) + 2);
+            }
+
+            for (int i = validControl.IndexQuestionAfter; i < questionControlList.Count; i++)
+            {
+                Grid.SetRow(questionControlList[i], Grid.GetRow(questionControlList[i]) + 2);
+            }
+
+            TimeIntervalControl newTimeInterval = AddNewTimeInterval(rowIndex + 2, index + 1);
+            AddNewQuestionLine(rowIndex + 1, validControl.IndexQuestionAfter, CurrentQuestion);
+
+            newTimeInterval.IndexQuestionBefore = validControl.IndexQuestionAfter;
+            newTimeInterval.IndexQuestionAfter = newTimeInterval.IndexQuestionBefore + 1;
+        } 
     }
 }

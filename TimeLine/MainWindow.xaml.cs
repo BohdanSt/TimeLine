@@ -28,6 +28,12 @@ namespace TimeLine
             InitializeComponent();
 
             gamesRules.StartGame += StartGame;
+            gamesControl.EndGame += EndGame;
+        }
+
+        private void EndGame(int counter, int currentAmountOfLife)
+        {
+            ShowGamesResult();
         }
 
         private void StartGame()
@@ -55,6 +61,26 @@ namespace TimeLine
 
             gamesRules.Visibility = Visibility.Collapsed;
             gamesRules.Opacity = 1;
+        }
+
+        private void ShowGamesResult()
+        {
+            gamesControl.Opacity = 1;
+            gamesResult.Opacity = 0;
+            gamesResult.Visibility = Visibility.Visible;
+
+            for (int i = 0; i < 50; i++)
+            {
+                gamesControl.Opacity -= 0.02;
+                gamesResult.Opacity += 0.02;
+
+                Dispatcher.Invoke(DispatcherPriority.Render, (Action)(() => { }));
+                Thread.Sleep(25);
+                Dispatcher.Invoke(DispatcherPriority.Render, (Action)(() => { }));
+            }
+
+            gamesControl.Visibility = Visibility.Collapsed;
+            gamesControl.Opacity = 1;
         }
     }
 }
