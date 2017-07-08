@@ -20,14 +20,17 @@ namespace TimeLine.GamesControls
     /// </summary>
     public partial class QuestionControl : UserControl
     {
-        public QuestionControl(string question)
+        public Question Question {get; set;}
+
+        public QuestionControl(Question question)
         {
             InitializeComponent();
 
             line.Width = this.Width / 4;
             line.X2 = this.Width / 4;
 
-            textBlockQuestion.Text = question;
+            Question = question;
+            textBlockQuestion.Text = question.Name;
         }
     }
 }

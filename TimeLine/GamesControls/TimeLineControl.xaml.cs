@@ -20,24 +20,40 @@ namespace TimeLine.GamesControls
     /// </summary>
     public partial class TimeLineControl : UserControl
     {
+        public Question CurrentQuestion { get; set; }
+
+        public delegate void CheckingAnswerResultDelegate(bool isAnswerValid);
+
+        public event CheckingAnswerResultDelegate CheckingAnswerResult;
+
         public TimeLineControl()
         {
             InitializeComponent();
+        }
 
-            AddNewQuestionLine(0, "Створення світу");
+        public void Initialize()
+        {
+            timeLineControlContainer.Children.Clear();
+
+            for (int i = 0; i < 100; i++)
+            {
+                timeLineControlContainer.RowDefinitions.Add(new RowDefinition());
+            }
+
+
+            AddNewQuestionLine(0, new Question() { Name = "Створення світу", Index = int.MinValue });
 
             AddNewTimeInterval(1);
 
-            AddNewQuestionLine(2, "Народження Христа");
+            AddNewQuestionLine(2, new Question() { Name = "Народження Христа", Index = 0 });
 
             AddNewTimeInterval(3);
 
-            AddNewQuestionLine(4, "Вознесіння");
+            AddNewQuestionLine(4, new Question() { Name = "Вознесіння", Index = int.MaxValue });
         }
 
         private void AddNewTimeInterval(int rowNumber)
         {
-            timeLineControlContainer.RowDefinitions.Add(new RowDefinition());
             TimeIntervalControl timeInterval = new TimeIntervalControl(rowNumber);
 
             timeInterval.ControlMouseEnter += TimeInterval_ControlMouseEnter;
@@ -46,6 +62,14 @@ namespace TimeLine.GamesControls
 
             Grid.SetRow(timeInterval, rowNumber);
             timeLineControlContainer.Children.Add(timeInterval);
+        }
+
+        private void AddNewQuestionLine(int rowNumber, Question question)
+        {
+            QuestionControl questionControl = new QuestionControl(question);
+
+            Grid.SetRow(questionControl, rowNumber);
+            timeLineControlContainer.Children.Add(questionControl);
         }
 
         private void TimeInterval_ControlMouseEnter(int position)
@@ -68,16 +92,48 @@ namespace TimeLine.GamesControls
 
         private void TimeInterval_ControlMouseDown(int position)
         {
-            //throw new NotImplementedException();
-        }
+            TimeIntervalControl clickedTimeIntervalControl = timeLineControlContainer.Children[position] as TimeIntervalControl;
+            TimeIntervalControl validTimeIntervalControl = null;
 
-        private void AddNewQuestionLine(int rowNumber, string question)
-        {
-            timeLineControlContainer.RowDefinitions.Add(new RowDefinition());
-            QuestionControl questionControl = new QuestionControl(question);
+            QuestionControl questionBefore = timeLineControlContainer.Children[position - 1] as QuestionControl;
+            QuestionControl questionAfter = timeLineControlContainer.Children[position + 1] as QuestionControl;
 
-            Grid.SetRow(questionControl, rowNumber);
-            timeLineControlContainer.Children.Add(questionControl);
+            bool isAnswerValid;
+
+            if (CurrentQuestion.Index > questionBefore.Question.Index
+                && CurrentQuestion.Index < questionAfter.Question.Index)
+            {
+                clickedTimeIntervalControl.ExpandControl();
+
+                clickedTimeIntervalControl.ShowAsNormal();
+
+                isAnswerValid = true;
+            }
+            else
+            {
+                clickedTimeIntervalControl.ShowAsWrongAnswer();
+
+                for (int i = 0; i < timeLineControlContainer.Children.Count; i++)
+                {
+                    if (timeLineControlContainer.Children[i] is QuestionControl)
+                    {
+                        QuestionControl questionControl = timeLineControlContainer.Children[i] as QuestionControl;
+                        if (questionControl.Question.Index > CurrentQuestion.Index)
+                        {
+                            validTimeIntervalControl = timeLineControlContainer.Children[i - 1] as TimeIntervalControl;
+                        }
+                    }
+                }
+
+                validTimeIntervalControl.ExpandControl();
+
+                clickedTimeIntervalControl.ShowAsNormal();
+                validTimeIntervalControl.ShowAsNormal();
+
+                isAnswerValid = false;
+            }
+
+            CheckingAnswerResult?.Invoke(isAnswerValid);
         }
     }
 }

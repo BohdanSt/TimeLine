@@ -7,7 +7,7 @@ using System.IO;
 
 namespace TimeLine
 {
-    class Question
+    public class Question
     {
         public string Name { get; set; }
         public int Index { get; set; }

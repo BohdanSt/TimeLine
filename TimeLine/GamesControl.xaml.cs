@@ -21,27 +21,54 @@ namespace TimeLine
     /// </summary>
     public partial class GamesControl : UserControl
     {
-        private int Counter;
+        private int counter;
+        private readonly int NumberOfQuestion;
+        private const int MAXNumberOfQuestion = 30;
 
         private List<Question> questionList;
-
         private List<int> usedQuestion = new List<int>();
-
         private Random rand = new Random();
+
+        public delegate void EndGameDelegate(int counter, int currentAmountOfLife);
+
+        public event EndGameDelegate EndGame;
 
         public GamesControl()
         {
             InitializeComponent();
 
             questionList = Question.ReadQuestions();
+            NumberOfQuestion = Math.Min(questionList.Count, MAXNumberOfQuestion);
+
+            timeLineControl.CheckingAnswerResult += TimeLineControl_CheckingAnswerResult;
+
+            StartGame();
+        }
+
+        private void TimeLineControl_CheckingAnswerResult(bool isAnswerValid)
+        {
+            if (counter == NumberOfQuestion)
+            {
+                EndGame?.Invoke(counter, gamesControlLife.CurrentAmountOfLife);
+            }
+            else if (isAnswerValid || gamesControlLife.Fail())
+            {
+                UpdateQuestion(questionList[GetRandom()]);
+            }
+            else
+            {
+                EndGame?.Invoke(counter, gamesControlLife.CurrentAmountOfLife);
+            }
         }
 
         public int GetRandom()
         {
             int index;
+            int listSize = questionList.Count;
+
             do
             {
-                index = rand.Next(questionList.Count);
+                index = rand.Next(listSize);
             } while (usedQuestion.Contains(index));
 
             usedQuestion.Add(index);
@@ -51,32 +78,22 @@ namespace TimeLine
 
         public void StartGame()
         {
-            Counter = 0;
+            counter = 0;
             usedQuestion.Clear();
 
-            UpdateNumberOfQuestion();
-            UpdateQuestion(questionList[GetRandom()].Name);
+            UpdateQuestion(questionList[GetRandom()]);
 
+            timeLineControl.Initialize();
             gamesControlLife.Initialize();
         }
 
-        public int GetCounter()
+        void UpdateQuestion(Question currentQuestion)
         {
-            return Counter;
-        }
-        public void Addition()
-        {
-            Counter++;
-        }
+            counter++;
+            textBlockNumberOfQuestion.Text = "Подія " + counter.ToString() + " з " + NumberOfQuestion.ToString();
+            textBlockQuestion.Text = currentQuestion.Name;
 
-        void UpdateNumberOfQuestion()
-        {
-            textBlockNumberOfQuestion.Text = "Подія " + Counter.ToString() + " з 30";
-        }
-
-        void UpdateQuestion(string question)
-        {
-            textBlockQuestion.Text = question;
+            timeLineControl.CurrentQuestion = currentQuestion;
         }
     }
 }

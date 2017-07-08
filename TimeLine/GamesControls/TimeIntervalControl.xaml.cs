@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace TimeLine.GamesControls
 {
@@ -50,21 +52,7 @@ namespace TimeLine.GamesControls
 
             controlPosition = position;
 
-            timeIntervalContainer.Background = normalBrush;
-            timeIntervalContainer.Opacity = 0.75;
-
-            for (int i = 0; i < NormalLineNumber; i++)
-            {
-                timeIntervalContainer.RowDefinitions.Add(new RowDefinition());
-                Line line = new Line();
-                line.Height = 1;
-                line.StrokeThickness = 1;
-                line.Width = this.Width / 6;
-                line.X2 = this.Width / 6;
-                line.Stroke = Brushes.White;
-                Grid.SetRow(line, i);
-                timeIntervalContainer.Children.Add(line);
-            }
+            ShowAsNormal();
         }
 
         private void timeIntervalContainer_MouseEnter(object sender, MouseEventArgs e)
@@ -89,7 +77,7 @@ namespace TimeLine.GamesControls
             timeIntervalContainer.Background.Opacity = 1;
         }
 
-        public async void ExpandControl()
+        public void ExpandControl()
         {
             timeIntervalContainer.Background = rightAnswerBrush;
             timeIntervalContainer.Background.Opacity = 1;
@@ -106,14 +94,40 @@ namespace TimeLine.GamesControls
                 Grid.SetRow(line, i);
                 timeIntervalContainer.Children.Add(line);
 
-                this.Height += 5;
-                await Task.Delay(10);
+                Height += 5;
+
+                Dispatcher.Invoke(DispatcherPriority.Render, (Action)(() => { }));
+                Thread.Sleep(25);
+                Dispatcher.Invoke(DispatcherPriority.Render, (Action)(() => { }));
             }
         }
 
         private void timeIntervalContainer_MouseDown(object sender, MouseButtonEventArgs e)
         {
             ControlMouseDown?.Invoke(controlPosition);
+        }
+
+        public void ShowAsNormal()
+        {
+            this.Height = 75;
+
+            timeIntervalContainer.Children.Clear();
+            timeIntervalContainer.RowDefinitions.Clear();
+            timeIntervalContainer.Background = normalBrush;
+            timeIntervalContainer.Opacity = 0.75;
+
+            for (int i = 0; i < NormalLineNumber; i++)
+            {
+                timeIntervalContainer.RowDefinitions.Add(new RowDefinition());
+                Line line = new Line();
+                line.Height = 1;
+                line.StrokeThickness = 1;
+                line.Width = this.Width / 6;
+                line.X2 = this.Width / 6;
+                line.Stroke = Brushes.White;
+                Grid.SetRow(line, i);
+                timeIntervalContainer.Children.Add(line);
+            }
         }
     }
 }

@@ -76,7 +76,7 @@ namespace TimeLine.GamesControls
             for (int i = 0; i < 20; i++)
             {
                 imageActiveLife.Opacity -= 0.05;
-                imageDisactiveLife.Opacity += 0.5;
+                imageDisactiveLife.Opacity += 0.05;
 
                 await Task.Delay(25);
             }

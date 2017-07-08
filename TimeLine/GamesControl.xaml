@@ -26,8 +26,9 @@
             <gamesControls:Life x:Name="gamesControlLife" DockPanel.Dock="Right" Margin="5 10 20 5" HorizontalAlignment="Right"/>
         </DockPanel>
 
-        <ScrollViewer Grid.Row="0" Grid.RowSpan="3" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-            <gamesControls:TimeLineControl />
+        <ScrollViewer x:Name="scrollViewer" Grid.Row="0" Grid.RowSpan="3" 
+                      VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+            <gamesControls:TimeLineControl x:Name="timeLineControl"/>
         </ScrollViewer>
 
         <Border BorderThickness="0" Grid.Row="2" HorizontalAlignment="Stretch">
