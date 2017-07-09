@@ -12,8 +12,8 @@
         Title="TimeLine" Height="500" Width="750" 
         NonActiveWindowTitleBrush="#FF555555"  WindowTitleBrush="#FF444040">
     <Grid>
-        <local:GamesRules x:Name="gamesRules" Visibility="Collapsed"/>
-        <local:GamesControl x:Name="gamesControl" Visibility="Visible"/>
+        <local:GamesRules x:Name="gamesRules" Visibility="Visible"/>
+        <local:GamesControl x:Name="gamesControl" Visibility="Collapsed"/>
         <local:GamesResult x:Name="gamesResult" Visibility="Collapsed"/>
     </Grid>
 </Controls:MetroWindow>

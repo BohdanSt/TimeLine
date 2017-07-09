@@ -39,6 +39,10 @@ namespace TimeLine.GamesControls
         public void Initialize()
         {
             timeLineControlContainer.Children.Clear();
+            timeLineControlContainer.RowDefinitions.Clear();
+
+            timeIntervalControlList.Clear();
+            questionControlList.Clear();
 
             for (int i = 0; i < 100; i++)
             {

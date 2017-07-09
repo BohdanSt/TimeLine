@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using TimeLine.GamesControls;
 
 namespace TimeLine
@@ -22,14 +24,14 @@ namespace TimeLine
     public partial class GamesControl : UserControl
     {
         private int counter;
-        private readonly int NumberOfQuestion;
+        private readonly int numberOfQuestion;
         private const int MAXNumberOfQuestion = 30;
 
         private List<Question> questionList;
         private List<int> usedQuestion = new List<int>();
         private Random rand = new Random();
 
-        public delegate void EndGameDelegate(int counter, int currentAmountOfLife);
+        public delegate void EndGameDelegate(int counter, int currentAmountOfLife, int numberOfQuestions);
 
         public event EndGameDelegate EndGame;
 
@@ -38,18 +40,20 @@ namespace TimeLine
             InitializeComponent();
 
             questionList = Question.ReadQuestions();
-            NumberOfQuestion = Math.Min(questionList.Count, MAXNumberOfQuestion);
+            numberOfQuestion = Math.Min(questionList.Count, MAXNumberOfQuestion);
 
             timeLineControl.CheckingAnswerResult += TimeLineControl_CheckingAnswerResult;
-
-            StartGame();
         }
 
         private void TimeLineControl_CheckingAnswerResult(bool isAnswerValid)
         {
-            if (counter == NumberOfQuestion)
+            if (counter == numberOfQuestion)
             {
-                EndGame?.Invoke(counter, gamesControlLife.CurrentAmountOfLife);
+                Dispatcher.Invoke(DispatcherPriority.Render, (Action)(() => { }));
+                Thread.Sleep(500);
+                Dispatcher.Invoke(DispatcherPriority.Render, (Action)(() => { }));
+
+                EndGame?.Invoke(counter, gamesControlLife.CurrentAmountOfLife, numberOfQuestion);
             }
             else if (isAnswerValid || gamesControlLife.Fail())
             {
@@ -57,7 +61,11 @@ namespace TimeLine
             }
             else
             {
-                EndGame?.Invoke(counter, gamesControlLife.CurrentAmountOfLife);
+                Dispatcher.Invoke(DispatcherPriority.Render, (Action)(() => { }));
+                Thread.Sleep(500);
+                Dispatcher.Invoke(DispatcherPriority.Render, (Action)(() => { }));
+
+                EndGame?.Invoke(counter, gamesControlLife.CurrentAmountOfLife, numberOfQuestion);
             }
         }
 
@@ -90,7 +98,7 @@ namespace TimeLine
         void UpdateQuestion(Question currentQuestion)
         {
             counter++;
-            textBlockNumberOfQuestion.Text = "Подія " + counter.ToString() + " з " + NumberOfQuestion.ToString();
+            textBlockNumberOfQuestion.Text = "Подія " + counter.ToString() + " з " + numberOfQuestion.ToString();
             textBlockQuestion.Text = currentQuestion.Name;
 
             timeLineControl.CurrentQuestion = currentQuestion;

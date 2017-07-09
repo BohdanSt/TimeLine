@@ -8,10 +8,20 @@
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="750">
     <Grid>
+        <Grid.Resources>
+            <Style TargetType="TextBlock">
+                <Setter Property="FontFamily" Value="Calibri"/>
+                <Setter Property="FontWeight" Value="DemiBold"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+            </Style>
+        </Grid.Resources>
+        
         <Grid.Background>
             <ImageBrush ImageSource="pack://application:,,,/TimeLine;component/Images/BackgroundRules.jpg" 
                         Stretch="UniformToFill" RenderOptions.BitmapScalingMode="HighQuality" Opacity="0.75"/>
         </Grid.Background>
+        
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition Height="auto"/>
@@ -26,16 +36,15 @@
                     <RowDefinition Height="3*"/>
                 </Grid.RowDefinitions>
                 <Viewbox Stretch="Uniform" Grid.Row="0">
-                    <TextBlock Text="Правила гри:" Margin="25" VerticalAlignment="Center" HorizontalAlignment="Center"
-                           Foreground="Black" FontWeight="SemiBold" FontSize="48" FontFamily="Calibri"/>
+                    <TextBlock Text="Правила гри:" Margin="25" Foreground="Black" FontSize="48"/>
                 </Viewbox>
                 <Viewbox Stretch="Uniform" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center">
-                    <TextBlock x:Name="textBoxRules" Margin="25 0 25 25" HorizontalAlignment="Stretch" VerticalAlignment="Top" TextWrapping="Wrap"
-                           Foreground="Black" FontWeight="SemiBold" FontSize="36" FontFamily="Calibri" Width="800"/>
+                    <TextBlock x:Name="textBoxRules" Margin="25 0 25 25" HorizontalAlignment="Stretch" VerticalAlignment="Top" 
+                           TextWrapping="Wrap" Foreground="Black" FontSize="36" Width="800"/>
                 </Viewbox>
             </Grid>
         </Border>
-        
+
         <Button x:Name="buttonStartGame" Grid.Row="1" Content="Розпочати гру" Margin="25 0 25 25" Height="60" Width="450" 
             Foreground="Black" FontWeight="SemiBold" FontSize="20" FontFamily="Calibri" Click="buttonStartGame_Click">
             <Button.Background>

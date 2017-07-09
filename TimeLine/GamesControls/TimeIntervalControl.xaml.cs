@@ -62,17 +62,17 @@ namespace TimeLine.GamesControls
         private void timeIntervalContainer_MouseEnter(object sender, MouseEventArgs e)
         {
             timeIntervalContainer.Background.Opacity = 1;
-            this.Height = 100;
-            this.Margin = new Thickness(0, -20, 0, -20);
-            ControlMouseEnter?.Invoke(IndexQuestionBefore, IndexQuestionAfter);
+            //this.Height = 100;
+            //this.Margin = new Thickness(0, -20, 0, -20);
+            //ControlMouseEnter?.Invoke(IndexQuestionBefore, IndexQuestionAfter);
         }
 
         private void timeIntervalContainer_MouseLeave(object sender, MouseEventArgs e)
         {
             timeIntervalContainer.Background.Opacity = 0.75;
-            this.Height = 75;
-            this.Margin = new Thickness(0, -15, 0, -15);
-            ControlMouseLeave?.Invoke(IndexQuestionBefore, IndexQuestionAfter);
+            //this.Height = 75;
+            //this.Margin = new Thickness(0, -15, 0, -15);
+            //ControlMouseLeave?.Invoke(IndexQuestionBefore, IndexQuestionAfter);
         }
 
         public void ShowAsWrongAnswer()

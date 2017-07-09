@@ -16,12 +16,22 @@ namespace TimeLine
         {
             int i = 0;
             List<Question> Qst = new List<Question>();
-            string[] readText = File.ReadAllLines("Question.txt");
+            string[] readText = File.ReadAllLines("QuestionBeforeChristmas.txt");
+            int size = readText.Count();
             foreach (string s in readText)
             {
+                Qst.Add(new Question() { Name = s, Index = i - size });
                 i++;
-                Qst.Add(new Question() { Name = s, Index = i });   
             }
+
+            i = 1;
+            readText = File.ReadAllLines("QuestionAfterChristmas.txt");
+            foreach (string s in readText)
+            {
+                Qst.Add(new Question() { Name = s, Index = i });
+                i++;
+            }
+
             return Qst;
         }
     }

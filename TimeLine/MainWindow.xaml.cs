@@ -29,58 +29,55 @@ namespace TimeLine
 
             gamesRules.StartGame += StartGame;
             gamesControl.EndGame += EndGame;
+
+            gamesResult.RestartGame += RestartGame;
+            gamesResult.CloseGame += CloseGame;
         }
 
-        private void EndGame(int counter, int currentAmountOfLife)
+        private void CloseGame()
         {
-            ShowGamesResult();
+            Close();
         }
 
-        private void StartGame()
+        private void RestartGame()
         {
-            ShowGameControl();
+            ShowNextControl(gamesResult, gamesControl);
 
             gamesControl.StartGame();
         }
 
-        private void ShowGameControl()
+        private void EndGame(int counter, int currentAmountOfLife, int numberOfQuestions)
         {
-            gamesRules.Opacity = 1;
-            gamesControl.Opacity = 0;
-            gamesControl.Visibility = Visibility.Visible;
+            ShowNextControl(gamesControl, gamesResult);
 
-            for (int i = 0; i < 50; i++)
-            {
-                gamesRules.Opacity -= 0.02;
-                gamesControl.Opacity += 0.02;
-
-                Dispatcher.Invoke(DispatcherPriority.Render, (Action)(() => { }));
-                Thread.Sleep(25);
-                Dispatcher.Invoke(DispatcherPriority.Render, (Action)(() => { }));
-            }
-
-            gamesRules.Visibility = Visibility.Collapsed;
-            gamesRules.Opacity = 1;
+            gamesResult.ShowResult(counter, currentAmountOfLife, numberOfQuestions);
         }
 
-        private void ShowGamesResult()
+        private void StartGame()
         {
-            gamesControl.Opacity = 1;
-            gamesResult.Opacity = 0;
-            gamesResult.Visibility = Visibility.Visible;
+            ShowNextControl(gamesRules, gamesControl);
+
+            gamesControl.StartGame();
+        }
+
+        private void ShowNextControl(UIElement previousControl, UIElement nextControl)
+        {
+            previousControl.Opacity = 1;
+            nextControl.Opacity = 0;
+            nextControl.Visibility = Visibility.Visible;
 
             for (int i = 0; i < 50; i++)
             {
-                gamesControl.Opacity -= 0.02;
-                gamesResult.Opacity += 0.02;
+                previousControl.Opacity -= 0.02;
+                nextControl.Opacity += 0.02;
 
                 Dispatcher.Invoke(DispatcherPriority.Render, (Action)(() => { }));
                 Thread.Sleep(25);
                 Dispatcher.Invoke(DispatcherPriority.Render, (Action)(() => { }));
             }
 
-            gamesControl.Visibility = Visibility.Collapsed;
-            gamesControl.Opacity = 1;
+            previousControl.Visibility = Visibility.Collapsed;
+            previousControl.Opacity = 1;
         }
     }
 }

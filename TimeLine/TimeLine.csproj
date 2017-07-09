@@ -173,13 +173,30 @@
     <Resource Include="Images\Supper.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Question.txt">
+    <EmbeddedResource Include="QuestionAfterChristmas.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\activeheart.png" />
     <Resource Include="Images\disactiveheart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="QuestionBeforeChristmas.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\BackgroundResult.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Greek.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Barbarian.jpg" />
+    <Resource Include="Images\Jew.jpg" />
+    <Resource Include="Images\Rabbi.jpg" />
+    <Resource Include="Images\Scribe.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

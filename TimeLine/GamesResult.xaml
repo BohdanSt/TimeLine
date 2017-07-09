@@ -7,17 +7,116 @@
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="750">
     <Grid>
-        <Button x:Name="buttonGameAgaine" Content="Розпочати знову" Margin="100,340,450,100" Height="60" 
-                FontSize="16" Click="buttonGameAgaine_Click">
-            <Button.Background>
-                <SolidColorBrush Color="WhiteSmoke" Opacity="0.65"/>
-            </Button.Background>
-        </Button>
-        <Button x:Name="buttonGameOver" Content="Закінчити гру" Margin="450,340,100,100" Height="60"
-                FontSize="16" Click="buttonGameOver_Click">
-            <Button.Background>
-                <SolidColorBrush Color="WhiteSmoke" Opacity="0.65"/>
-            </Button.Background>
-        </Button>
+        <Grid.Resources>
+            <Style TargetType="TextBlock">
+                <Setter Property="FontFamily" Value="Calibri"/>
+                <Setter Property="FontWeight" Value="DemiBold"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+            </Style>
+        </Grid.Resources>
+        
+        <Grid.Background>
+            <ImageBrush ImageSource="pack://application:,,,/TimeLine;component/Images/BackgroundResult.jpg" 
+                        Stretch="UniformToFill" RenderOptions.BitmapScalingMode="HighQuality" Opacity="0.6"/>
+        </Grid.Background>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Vertical">
+            <TextBlock x:Name="textBlockResultAnswers" Margin="25" Foreground="White" FontSize="48"/>
+            <TextBlock Text="Ваш результат:" Margin="25" Foreground="White" FontSize="36"/>
+        </StackPanel>
+
+        <Grid Grid.Row="1" HorizontalAlignment="Stretch">
+            <Grid.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="FontSize" Value="24"/>
+                    <Setter Property="Opacity" Value="0.75"/>
+                    <Setter Property="Margin" Value="25"/>
+                    <Setter Property="VerticalAlignment" Value="Center"/>
+                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                </Style>
+
+                <Style TargetType="Ellipse">
+                    <Setter Property="Height" Value="200"/>
+                    <Setter Property="Width" Value="200"/>
+                    <Setter Property="Margin" Value="10"/>
+                    <Setter Property="Opacity" Value="0.65"/>
+                </Style>
+            </Grid.Resources>
+            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Ellipse x:Name="imageLevel0" Grid.Row="0" Grid.Column="0">
+                <Ellipse.Fill>
+                    <ImageBrush ImageSource="pack://application:,,,/TimeLine;component/Images/Barbarian.jpg"/>
+                </Ellipse.Fill>
+            </Ellipse>
+
+            <Ellipse x:Name="imageLevel1" Grid.Row="0" Grid.Column="1">
+                <Ellipse.Fill>
+                    <ImageBrush ImageSource="pack://application:,,,/TimeLine;component/Images/Greek.jpg"/>
+                </Ellipse.Fill>
+            </Ellipse>
+
+            <Ellipse x:Name="imageLevel2" Grid.Row="0" Grid.Column="2">
+                <Ellipse.Fill>
+                    <ImageBrush ImageSource="pack://application:,,,/TimeLine;component/Images/Jew.jpg"/>
+                </Ellipse.Fill>
+            </Ellipse>
+
+            <Ellipse x:Name="imageLevel3" Grid.Row="0" Grid.Column="3">
+                <Ellipse.Fill>
+                    <ImageBrush ImageSource="pack://application:,,,/TimeLine;component/Images/Scribe.jpg"/>
+                </Ellipse.Fill>
+            </Ellipse>
+
+            <Ellipse x:Name="imageLevel4" Grid.Row="0" Grid.Column="4">
+                <Ellipse.Fill>
+                    <ImageBrush ImageSource="pack://application:,,,/TimeLine;component/Images/Rabbi.jpg"/>
+                </Ellipse.Fill>
+            </Ellipse>
+
+            <TextBlock x:Name="textBlockLevel0" Grid.Row="1" Grid.Column="0" Text="Варвар"/>
+            <TextBlock x:Name="textBlockLevel1" Grid.Row="1" Grid.Column="1" Text="Грек"/>
+            <TextBlock x:Name="textBlockLevel2" Grid.Row="1" Grid.Column="2" Text="Юдей"/>
+            <TextBlock x:Name="textBlockLevel3" Grid.Row="1" Grid.Column="3" Text="Книжник"/>
+            <TextBlock x:Name="textBlockLevel4" Grid.Row="1" Grid.Column="4" Text="Раввін"/>
+        </Grid>
+
+        <TextBlock x:Name="textBlockResultLevel" Grid.Row="2" Margin="25" Foreground="White" FontSize="48"/>
+
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button x:Name="buttonGameAgaine" Content="Розпочати знову" Margin="25 0 25 25" Height="60" Width="450" 
+            Foreground="Black" FontWeight="SemiBold" FontSize="20" FontFamily="Calibri" Click="buttonGameAgaine_Click">
+                <Button.Background>
+                    <SolidColorBrush Color="White" Opacity="0.65"/>
+                </Button.Background>
+            </Button>
+            <Button x:Name="buttonGameOver" Content="Закінчити гру" Margin="25 0 25 25" Height="60" Width="450" 
+            Foreground="Black" FontWeight="SemiBold" FontSize="20" FontFamily="Calibri" Click="buttonGameOver_Click">
+                <Button.Background>
+                    <SolidColorBrush Color="WhiteSmoke" Opacity="0.65"/>
+                </Button.Background>
+            </Button>
+        </StackPanel>
     </Grid>
 </UserControl>
