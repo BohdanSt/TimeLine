@@ -28,6 +28,10 @@ namespace TimeLine
 
         public event CloseGameDelegate CloseGame;
 
+        private List<TextBlock> textBlockLevelList = new List<TextBlock>();
+
+        private List<Ellipse> imageLevelList = new List<Ellipse>(); 
+
         private List<string> levelList = new List<string>
         {
             "Варвар",
@@ -37,13 +41,31 @@ namespace TimeLine
             "Раввін"
         };
 
+        private int levelValue;
+
         public GamesResult()
         {
             InitializeComponent();
+
+            textBlockLevelList.Add(textBlockLevel0);
+            textBlockLevelList.Add(textBlockLevel1);
+            textBlockLevelList.Add(textBlockLevel2);
+            textBlockLevelList.Add(textBlockLevel3);
+            textBlockLevelList.Add(textBlockLevel4);
+
+            imageLevelList.Add(imageLevel0);
+            imageLevelList.Add(imageLevel1);
+            imageLevelList.Add(imageLevel2);
+            imageLevelList.Add(imageLevel3);
+            imageLevelList.Add(imageLevel4);
         }
         private void buttonGameAgaine_Click(object sender, RoutedEventArgs e)
         {
             RestartGame?.Invoke();
+
+            textBlockLevelList[levelValue].Opacity = 0.75;
+            textBlockLevelList[levelValue].Foreground = Brushes.White;
+            imageLevelList[levelValue].Opacity = 0.65;
         }
 
         private void buttonGameOver_Click(object sender, RoutedEventArgs e)
@@ -55,7 +77,6 @@ namespace TimeLine
         {
             textBlockResultAnswers.Text = "Ви протримались " + counter.ToString() + " раундів";
 
-            int levelValue;
             if (counter == numberOfQuestions && currentAmountOfLife == 5)
             {
                 levelValue = 4;
@@ -77,34 +98,9 @@ namespace TimeLine
                 levelValue = 0;
             }
 
-            switch (levelValue)
-            {
-                case 0:
-                    textBlockLevel0.Opacity = 1;
-                    textBlockLevel0.Foreground = Brushes.Yellow;
-                    imageLevel0.Opacity = 1;
-                    break;
-                case 1:
-                    textBlockLevel1.Opacity = 1;
-                    textBlockLevel1.Foreground = Brushes.Yellow;
-                    imageLevel1.Opacity = 1;
-                    break;
-                case 2:
-                    textBlockLevel2.Opacity = 1;
-                    textBlockLevel2.Foreground = Brushes.Yellow;
-                    imageLevel2.Opacity = 1;
-                    break;
-                case 3:
-                    textBlockLevel3.Opacity = 1;
-                    textBlockLevel3.Foreground = Brushes.Yellow;
-                    imageLevel3.Opacity = 1;
-                    break;
-                case 4:
-                    textBlockLevel4.Opacity = 1;
-                    textBlockLevel4.Foreground = Brushes.Yellow;
-                    imageLevel4.Opacity = 1;
-                    break;
-            }
+            textBlockLevelList[levelValue].Opacity = 1;
+            textBlockLevelList[levelValue].Foreground = Brushes.Yellow;
+            imageLevelList[levelValue].Opacity = 1;
 
             textBlockResultLevel.Text = "Ви знаєте Біблію на рівні: " + levelList[levelValue];
         }

@@ -5,10 +5,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TimeLine.GamesControls"
              mc:Ignorable="d" 
-             Width="400">
-    <StackPanel Orientation="Horizontal">
+             Width="600">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
         <Line x:Name="line" Height="2" StrokeThickness="2" Stroke="White"/>
         <TextBlock x:Name="textBlockQuestion" FontSize="24" FontWeight="DemiBold" Foreground="White"
                    Margin="15 0 0 0" TextWrapping="Wrap"/>
-    </StackPanel>
+    </Grid>
 </UserControl>

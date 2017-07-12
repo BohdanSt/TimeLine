@@ -48,7 +48,7 @@ namespace TimeLine.GamesControls
 
         public bool Fail()
         {
-            for (int i = 0; i < MAXLifeAmount; i++)
+            for (int i = 0; i < MAXLifeAmount - 1; i++)
             {
                 if(lifeList[i].IsActive)
                 {

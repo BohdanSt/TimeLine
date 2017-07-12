@@ -78,8 +78,8 @@ namespace TimeLine.GamesControls
         {
             TimeIntervalControl timeInterval = new TimeIntervalControl(position);
 
-            timeInterval.ControlMouseEnter += TimeInterval_ControlMouseEnter;
-            timeInterval.ControlMouseLeave += TimeInterval_ControlMouseLeave;
+            //timeInterval.ControlMouseEnter += TimeInterval_ControlMouseEnter;
+            //timeInterval.ControlMouseLeave += TimeInterval_ControlMouseLeave;
             timeInterval.ControlMouseDown += TimeInterval_ControlMouseDown;
 
             Grid.SetRow(timeInterval, rowNumber);
@@ -90,19 +90,19 @@ namespace TimeLine.GamesControls
             return timeInterval;
         }
 
-        private void TimeInterval_ControlMouseEnter(int indexBefore, int indexAfter)
-        {
-            questionControlList[indexBefore].textBlockQuestion.FontSize = 30;
-            questionControlList[indexAfter].textBlockQuestion.FontSize = 30;
-        }
+        //private void TimeInterval_ControlMouseEnter(int indexBefore, int indexAfter)
+        //{
+        //    questionControlList[indexBefore].textBlockQuestion.FontSize = 30;
+        //    questionControlList[indexAfter].textBlockQuestion.FontSize = 30;
+        //}
 
-        private void TimeInterval_ControlMouseLeave(int indexBefore, int indexAfter)
-        {
-            questionControlList[indexBefore].textBlockQuestion.FontSize = 24;
-            questionControlList[indexAfter].textBlockQuestion.FontSize = 24;
-        }
+        //private void TimeInterval_ControlMouseLeave(int indexBefore, int indexAfter)
+        //{
+        //    questionControlList[indexBefore].textBlockQuestion.FontSize = 24;
+        //    questionControlList[indexAfter].textBlockQuestion.FontSize = 24;
+        //}
 
-        private void TimeInterval_ControlMouseDown(int controlIndex)
+        private async void TimeInterval_ControlMouseDown(int controlIndex)
         {
             TimeIntervalControl clickedTimeIntervalControl = timeIntervalControlList[controlIndex];
             TimeIntervalControl validTimeIntervalControl = null;
@@ -131,9 +131,7 @@ namespace TimeLine.GamesControls
             {
                 clickedTimeIntervalControl.ShowAsWrongAnswer();
 
-                //Dispatcher.Invoke(DispatcherPriority.Render, (Action)(() => { }));
-                //Thread.Sleep(1000);
-                //Dispatcher.Invoke(DispatcherPriority.Render, (Action)(() => { }));
+                await Task.Delay(1000);
 
                 for (int i = 0; i < timeIntervalControlList.Count; i++)
                 {
@@ -148,12 +146,17 @@ namespace TimeLine.GamesControls
                     }
                 }
 
-                questionBefore.BringIntoView();
+                if (clickedTimeIntervalControl.Index > validTimeIntervalControl.Index)
+                {
+                    questionBefore.BringIntoView();
+                }
+                else
+                {
+                    questionAfter.BringIntoView();
+                }
                 validTimeIntervalControl.ExpandControl();
 
-                Dispatcher.Invoke(DispatcherPriority.Render, (Action)(() => { }));
-                Thread.Sleep(500);
-                Dispatcher.Invoke(DispatcherPriority.Render, (Action)(() => { }));
+                await Task.Delay(500);
 
                 InsertQuestion(validTimeIntervalControl.Index);
 
