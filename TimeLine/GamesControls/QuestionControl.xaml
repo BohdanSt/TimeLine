@@ -11,8 +11,8 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Line x:Name="line" Height="2" StrokeThickness="2" Stroke="White"/>
-        <TextBlock x:Name="textBlockQuestion" FontSize="24" FontWeight="DemiBold" Foreground="White"
+        <Line x:Name="line" Grid.Column="0" Height="2" StrokeThickness="2" Stroke="White"/>
+        <TextBlock x:Name="textBlockQuestion" Grid.Column="1" FontSize="24" FontWeight="DemiBold" Foreground="White"
                    Margin="15 0 0 0" TextWrapping="Wrap"/>
     </Grid>
 </UserControl>
