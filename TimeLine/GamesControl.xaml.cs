@@ -45,13 +45,11 @@ namespace TimeLine
             timeLineControl.CheckingAnswerResult += TimeLineControl_CheckingAnswerResult;
         }
 
-        private void TimeLineControl_CheckingAnswerResult(bool isAnswerValid)
+        private async void TimeLineControl_CheckingAnswerResult(bool isAnswerValid)
         {
             if (counter == numberOfQuestion)
             {
-                Dispatcher.Invoke(DispatcherPriority.Render, (Action)(() => { }));
-                Thread.Sleep(500);
-                Dispatcher.Invoke(DispatcherPriority.Render, (Action)(() => { }));
+                await Task.Delay(500);
 
                 EndGame?.Invoke(counter, gamesControlLife.CurrentAmountOfLife, numberOfQuestion);
             }
@@ -61,9 +59,7 @@ namespace TimeLine
             }
             else
             {
-                Dispatcher.Invoke(DispatcherPriority.Render, (Action)(() => { }));
-                Thread.Sleep(500);
-                Dispatcher.Invoke(DispatcherPriority.Render, (Action)(() => { }));
+                await Task.Delay(500);
 
                 EndGame?.Invoke(counter, gamesControlLife.CurrentAmountOfLife, numberOfQuestion);
             }

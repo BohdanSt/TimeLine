@@ -61,11 +61,14 @@ namespace TimeLine
         }
         private void buttonGameAgaine_Click(object sender, RoutedEventArgs e)
         {
-            RestartGame?.Invoke();
-
             textBlockLevelList[levelValue].Opacity = 0.75;
             textBlockLevelList[levelValue].Foreground = Brushes.White;
             imageLevelList[levelValue].Opacity = 0.65;
+
+            textBlockResultAnswers.Text = "";
+            textBlockResultLevel.Text = "";
+
+            RestartGame?.Invoke();
         }
 
         private void buttonGameOver_Click(object sender, RoutedEventArgs e)

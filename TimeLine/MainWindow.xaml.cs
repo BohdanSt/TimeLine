@@ -41,9 +41,9 @@ namespace TimeLine
 
         private void RestartGame()
         {
-            ShowNextControl(gamesResult, gamesControl);
-
             gamesControl.StartGame();
+
+            ShowNextControl(gamesResult, gamesControl);
         }
 
         private void EndGame(int counter, int currentAmountOfLife, int numberOfQuestions)
