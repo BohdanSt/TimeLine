@@ -117,9 +117,7 @@ namespace TimeLine.GamesControls
             {
                 clickedTimeIntervalControl.ExpandControl();
 
-                Dispatcher.Invoke(DispatcherPriority.Render, (Action)(() => { }));
-                Thread.Sleep(500);
-                Dispatcher.Invoke(DispatcherPriority.Render, (Action)(() => { }));
+                await Task.Delay(500);
 
                 InsertQuestion(controlIndex);
 
