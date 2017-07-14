@@ -48,11 +48,15 @@ namespace TimeLine.GamesControls
 
         public bool Fail()
         {
-            for (int i = 0; i < MAXLifeAmount - 1; i++)
+            for (int i = 0; i < MAXLifeAmount; i++)
             {
                 if(lifeList[i].IsActive)
                 {
                     lifeList[i].IsActive = false;
+                    if (i == MAXLifeAmount - 1)
+                    {
+                        return false;
+                    }
                     return true;
                 }
             }
