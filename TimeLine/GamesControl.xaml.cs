@@ -43,6 +43,12 @@ namespace TimeLine
             numberOfQuestion = Math.Min(questionList.Count, MAXNumberOfQuestion);
 
             timeLineControl.CheckingAnswerResult += TimeLineControl_CheckingAnswerResult;
+            timeLineControl.WrongAnswerLifeChange += TimeLineControl_WrongAnswerLifeChange;
+        }
+
+        private void TimeLineControl_WrongAnswerLifeChange()
+        {
+            gamesControlLife.Fail();
         }
 
         private void TimeLineControl_CheckingAnswerResult(bool isAnswerValid)
@@ -55,7 +61,7 @@ namespace TimeLine
 
                 EndGame?.Invoke(counter, gamesControlLife.CurrentAmountOfLife, numberOfQuestion);
             }
-            else if (isAnswerValid || gamesControlLife.Fail())
+            else if (isAnswerValid || gamesControlLife.CurrentAmountOfLife > 0)
             {
                 UpdateQuestion(questionList[GetRandom()]);
             }

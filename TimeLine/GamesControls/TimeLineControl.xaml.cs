@@ -31,6 +31,10 @@ namespace TimeLine.GamesControls
 
         public event CheckingAnswerResultDelegate CheckingAnswerResult;
 
+        public delegate void WrongAnswerLifeChangeDelegate();
+
+        public event WrongAnswerLifeChangeDelegate WrongAnswerLifeChange;
+
         public TimeLineControl()
         {
             InitializeComponent();
@@ -129,6 +133,8 @@ namespace TimeLine.GamesControls
             {
                 clickedTimeIntervalControl.ShowAsWrongAnswer();
 
+                WrongAnswerLifeChange?.Invoke();
+
                 await Task.Delay(1000);
 
                 for (int i = 0; i < timeIntervalControlList.Count; i++)
@@ -163,6 +169,8 @@ namespace TimeLine.GamesControls
 
                 isAnswerValid = false;
             }
+
+            await Task.Delay(500);
 
             CheckingAnswerResult?.Invoke(isAnswerValid);
         }

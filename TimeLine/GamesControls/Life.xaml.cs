@@ -46,21 +46,16 @@ namespace TimeLine.GamesControls
             }
         }
 
-        public bool Fail()
+        public void Fail()
         {
             for (int i = 0; i < MAXLifeAmount; i++)
             {
-                if(lifeList[i].IsActive)
+                if (lifeList[i].IsActive)
                 {
                     lifeList[i].IsActive = false;
-                    if (i == MAXLifeAmount - 1)
-                    {
-                        return false;
-                    }
-                    return true;
+                    return;
                 }
             }
-            return false;
         }
 
         public void Initialize()

@@ -37,7 +37,7 @@
             <Grid.Resources>
                 <Style TargetType="TextBlock">
                     <Setter Property="Foreground" Value="White"/>
-                    <Setter Property="FontSize" Value="24"/>
+                    <Setter Property="FontSize" Value="32"/>
                     <Setter Property="Opacity" Value="0.75"/>
                     <Setter Property="Margin" Value="25"/>
                     <Setter Property="VerticalAlignment" Value="Center"/>
@@ -106,13 +106,13 @@
 
         <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
             <Button x:Name="buttonGameAgaine" Content="Розпочати знову" Margin="25 0 25 25" Height="60" Width="450" 
-            Foreground="Black" FontWeight="SemiBold" FontSize="20" FontFamily="Calibri" Click="buttonGameAgaine_Click">
+            Foreground="Black" FontWeight="SemiBold" FontSize="24" FontFamily="Calibri" Click="buttonGameAgaine_Click">
                 <Button.Background>
                     <SolidColorBrush Color="White" Opacity="0.65"/>
                 </Button.Background>
             </Button>
             <Button x:Name="buttonGameOver" Content="Закінчити гру" Margin="25 0 25 25" Height="60" Width="450" 
-            Foreground="Black" FontWeight="SemiBold" FontSize="20" FontFamily="Calibri" Click="buttonGameOver_Click">
+            Foreground="Black" FontWeight="SemiBold" FontSize="24" FontFamily="Calibri" Click="buttonGameOver_Click">
                 <Button.Background>
                     <SolidColorBrush Color="WhiteSmoke" Opacity="0.65"/>
                 </Button.Background>

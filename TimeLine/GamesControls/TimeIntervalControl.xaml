@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:TimeLine.GamesControls"
              mc:Ignorable="d" 
              Width="72" Height="75"
-             Margin="0 -15 0 -15"
+             Margin="0 -18 0 -17"
              HorizontalAlignment="Left">
     <Grid x:Name="timeIntervalContainer"
           MouseEnter="timeIntervalContainer_MouseEnter" 
