@@ -20,7 +20,7 @@ namespace TimeLine.GamesControls
     /// </summary>
     public partial class Life : UserControl
     {
-        private const int MAXLifeAmount = 5;
+        public const int MAXLifeAmount = 3;
 
         public int CurrentAmountOfLife
         {

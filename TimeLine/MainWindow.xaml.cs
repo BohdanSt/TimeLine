@@ -46,11 +46,11 @@ namespace TimeLine
             ShowNextControl(gamesResult, gamesControl);
         }
 
-        private void EndGame(int counter, int currentAmountOfLife, int numberOfQuestions)
+        private void EndGame(int counter, int currentAmountOfLife, int numberOfQuestions, int MaxAmountOfLife)
         {
             ShowNextControl(gamesControl, gamesResult);
 
-            gamesResult.ShowResult(counter, currentAmountOfLife, numberOfQuestions);
+            gamesResult.ShowResult(counter, currentAmountOfLife, numberOfQuestions, MaxAmountOfLife);
         }
 
         private void StartGame()

@@ -76,11 +76,11 @@ namespace TimeLine
             CloseGame?.Invoke();
         }
 
-        public void ShowResult(int counter, int currentAmountOfLife, int numberOfQuestions)
+        public void ShowResult(int counter, int currentAmountOfLife, int numberOfQuestions, int MaxAmountOfLife)
         {
             textBlockResultAnswers.Text = "Ви протримались " + counter.ToString() + " раундів";
 
-            if (counter == numberOfQuestions && currentAmountOfLife == 5)
+            if (counter == numberOfQuestions && currentAmountOfLife == MaxAmountOfLife)
             {
                 levelValue = 4;
             }
