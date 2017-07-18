@@ -53,7 +53,7 @@ namespace TimeLine.GamesControls
                 timeLineControlContainer.RowDefinitions.Add(new RowDefinition());
             }
 
-            AddNewQuestionLine(0, 0, new Question() { Name = "Створення світу", Index = int.MinValue });
+            AddNewQuestionLine(0, 0, new Question() { Name = "Початок творення світу", Index = int.MinValue });
 
             AddNewTimeInterval(1, 0);
             timeIntervalControlList[0].IndexQuestionBefore = 0;
@@ -65,7 +65,7 @@ namespace TimeLine.GamesControls
             timeIntervalControlList[1].IndexQuestionBefore = 1;
             timeIntervalControlList[1].IndexQuestionAfter = 2;
 
-            AddNewQuestionLine(4, 2, new Question() { Name = "Вознесіння", Index = int.MaxValue });
+            AddNewQuestionLine(4, 2, new Question() { Name = "Вознесіння церкви", Index = int.MaxValue });
         }
 
         private void AddNewQuestionLine(int rowNumber, int position, Question question)
